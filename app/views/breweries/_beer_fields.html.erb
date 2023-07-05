@@ -1,0 +1,34 @@
+<div class="nested-fields">
+  <div class="card mb-3">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      Beer
+      <%= link_to "Remove", "#", data: {action: "click->nested-form#remove_association" } %>
+    </div>
+    <div class="card-body">
+      <div class="mb-3">
+        <%= form.hidden_field :_destroy %>
+        <%= form.text_field :name, autofocus: false, class: 'form-control', placeholder: "Beer Name" %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.text_field :style, autofocus: false, class: 'form-control', placeholder: "Beer Style" %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.number_field :abv, step: 0.1, max: 20, autofocus: false, class: 'form-control', placeholder: "ABV" %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.number_field :ibu, step: 1, autofocus: false, class: 'form-control', placeholder: "IBU" %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.text_area :description, autofocus: false, class: 'form-control', placeholder: "Description" %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.text_field :untappd_link, autofocus: false, class: 'form-control', placeholder: "Untappd Url" %>
+      </div>
+    </div>
+  </div>
+</div>

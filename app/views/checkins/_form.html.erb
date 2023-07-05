@@ -1,0 +1,29 @@
+<%= form_with(model: checkin) do |form| %>
+  <% if checkin.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(checkin.errors.count, "error") %> prohibited this checkin from being saved:</h2>
+
+      <ul>
+      <% checkin.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <% if checkin.persisted? %>
+      <div class="float-end">
+        <%= link_to 'Destroy', checkin, method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
+      </div>
+    <% end %>
+
+    <%= form.submit class: 'btn btn-primary' %>
+
+    <% if checkin.persisted? %>
+      <%= link_to "Cancel", checkin, class: "btn btn-link" %>
+    <% else %>
+      <%= link_to "Cancel", checkins_path, class: "btn btn-link" %>
+    <% end %>
+  </div>
+<% end %>

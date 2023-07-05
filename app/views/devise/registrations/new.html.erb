@@ -21,6 +21,43 @@
         <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder: 'Confirm Password' %>
       </div>
 
+      <hr />
+
+      <div class="mb-3">
+        <label class="d-block">Are you a current LBG member?</label>
+        <div class="btn-group" data-toggle="buttons">
+          <%= f.radio_button :current_member, true, type: "radio", class: "form-check btn-check", id: "current_member_true", autocomplete: "off"  %>
+          <%= f.label :current_member, class: "btn btn-outline-primary", for: "current_member_true", value: "Yes" %>
+          <%= f.radio_button :current_member, false, type: "radio", class: "form-check btn-check", id: "current_member_false", autocomplete: "off" %>
+          <%= f.label :current_member, class: "btn btn-outline-primary", for: "current_member_false", value: "No" %>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="d-block">Did you donate or plan to donate any beers to Brewfest?</label>
+        <div class="btn-group" data-toggle="buttons">
+          <%= f.radio_button :plan_to_donate, true, type: "radio", class: "form-check btn-check", id: "donate_true", autocomplete: "off"  %>
+          <%= f.label :plan_to_donate, class: "btn btn-outline-primary", for: "donate_true", value: "Yes" %>
+          <%= f.radio_button :plan_to_donate, false, type: "radio", class: "form-check btn-check", id: "donate_false", autocomplete: "off" %>
+          <%= f.label :plan_to_donate, class: "btn btn-outline-primary", for: "donate_false", value: "No" %>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="d-block">Are you interested in joining the Lawrence Brewers Guild or learning more about the club?</label>
+        <div class="btn-group" data-toggle="buttons">
+          <%= f.radio_button :desires_more_info, true, type: "radio", class: "form-check btn-check", id: "more_info_true", autocomplete: "off"  %>
+          <%= f.label :desires_more_info, class: "btn btn-outline-primary", for: "more_info_true", value: "Yes" %>
+          <%= f.radio_button :desires_more_info, false, type: "radio", class: "form-check btn-check", id: "more_info_false", autocomplete: "off" %>
+          <%= f.label :desires_more_info, class: "btn btn-outline-primary", for: "more_info_false", value: "No" %>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="d-block">If referred by an LBG member, please enter their name
+        <%= f.text_field :referring_member, class: 'form-control', placeholder: 'Name of Referring Member'%>
+      </div>
+
       <div class="mb-3 d-grid">
         <%= f.submit "Sign up", class: "btn btn-primary btn-lg" %>
       </div>

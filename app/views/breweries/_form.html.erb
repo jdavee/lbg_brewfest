@@ -1,0 +1,68 @@
+<%= form_with(model: brewery) do |form| %>
+  <% if brewery.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(brewery.errors.count, "error") %> prohibited this brewery from being saved:</h2>
+
+      <ul>
+      <% brewery.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="card">
+    <div class="card-header">
+      <h5 class="my-auto">Create New Brewery</h5>
+    </div>
+    <div class="card-body">
+      <div class="mb-3">
+        <%= form.text_field :name, autofocus: false, class: 'form-control', placeholder: "Brewery Name" %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.text_field :member_name, autofocus: false, class: 'form-control', placeholder: "Full Name of Member" %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.text_area :description, autofocus: false, class: 'form-control', placeholder: "Description" %>
+      </div>
+
+      <hr class="text-primary border-3 opacity-100" />
+
+      <div class="mb-3">
+        <div data-controller="nested-form">
+          <div data-target="nested-form.add_item">
+            <%= link_to "Add Beer", "#", data: {action: "nested-form#add_association" }, class: 'btn btn-primary' %>
+          </div>
+          <template data-target='nested-form.template'>
+            <%= form.fields_for :beers, Beer.new, child_index: 'TEMPLATE_RECORD' do |beer| %>
+              <%= render 'beer_fields', form: beer %>
+            <% end %>
+          </template>
+        </div>
+      </div>
+
+      <hr class="text-primary border-3 opacity-100" />
+      
+    </div>
+
+    <div class="card-footer text-center">
+      <div class="mb-3">
+        <% if brewery.persisted? %>
+          <div class="float-end">
+            <%= link_to 'Destroy', brewery, method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
+          </div>
+        <% end %>
+
+        <%= form.submit class: 'btn btn-primary btn-lg' %>
+
+        <% if brewery.persisted? %>
+          <%= link_to "Cancel", brewery, class: "btn btn-link" %>
+        <% else %>
+          <%= link_to "Cancel", breweries_path, class: "btn btn-link" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

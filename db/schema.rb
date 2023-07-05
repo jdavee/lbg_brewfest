@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_12_030917) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_02_070510) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -47,6 +47,37 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_12_030917) do
     t.string "announcement_type"
     t.string "name"
     t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "beers", force: :cascade do |t|
+    t.integer "brewery_id"
+    t.text "name"
+    t.string "style"
+    t.decimal "abv", precision: 3, scale: 2
+    t.integer "ibu"
+    t.text "description"
+    t.text "untappd_link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "breweries", force: :cascade do |t|
+    t.integer "user_id"
+    t.text "name"
+    t.string "member_name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "checkins", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "beer_id"
+    t.boolean "sampled", default: false
+    t.decimal "rating", precision: 2, scale: 1
+    t.text "review"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -100,6 +131,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_12_030917) do
     t.boolean "admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "current_member", default: false
+    t.boolean "confirmed_current_member", default: false
+    t.string "referring_member"
+    t.boolean "desires_more_info", default: false
+    t.boolean "plan_to_donate", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
