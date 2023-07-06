@@ -12,8 +12,15 @@
   <% end %>
 
   <div class="card">
-    <div class="card-header">
-      <h5 class="my-auto">Create New Brewery</h5>
+    <div class="card-header d-flex justify-content-between">
+      <h5 class="my-auto">
+        <%= brewery.new_record? ? 'Create New Brewery' : 'Edit Brewery' %>
+      </h5>
+      <% if brewery.persisted? %>
+        <%= link_to brewery, method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } do %>
+          <i class="fa fa-trash"></i>
+        <% end %>
+      <% end %>
     </div>
     <div class="card-body">
       <div class="mb-3">
@@ -30,16 +37,32 @@
 
       <hr class="text-primary border-3 opacity-100" />
 
-      <div class="mb-3">
-        <div data-controller="nested-form">
-          <div data-target="nested-form.add_item">
-            <%= link_to "Add Beer", "#", data: {action: "nested-form#add_association" }, class: 'btn btn-primary' %>
+      <div class="accordion mb-3" id="addBeersAccordion">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="addBeersHeading">
+            <button class="accordion-button bg-primary text-light" type="button" data-bs-toggle="collapse" data-bs-target="#addBeersCollapse" aria-expanded="true" aria-controls="addBeersCollapse">
+              <%= brewery.new_record? ? 'Add Beers' : 'Edit Beers' %>
+            </button>
+          </h2>
+          <div id="addBeersCollapse" class="accordion-collapse collapse <%= class_names(show: brewery.beers.count >= 1) %>" aria-labelledby="addBeersHeading" data-bs-parent="#addBeersAccordion">
+            <div class="accordion-body">
+              <div data-controller="nested-form">
+                <template data-nested-form-target="template">
+                  <%= form.fields_for :beers, Beer.new, child_index: 'TEMPLATE_RECORD' do |beer| %>
+                    <%= render 'beer_fields', form: beer %>
+                  <% end %>
+                </template>
+
+                <%= form.fields_for :beers do |beer| %>
+                  <%= render 'beer_fields', form: beer %>
+                <% end %>
+
+                <div data-nested-form-target="add_item" class="mb-2">
+                  <%= link_to "Add Beer", "#", data: {action: "nested-form#add_association" }, class: 'btn btn-primary' %>
+                </div>
+              </div>
+            </div>
           </div>
-          <template data-target='nested-form.template'>
-            <%= form.fields_for :beers, Beer.new, child_index: 'TEMPLATE_RECORD' do |beer| %>
-              <%= render 'beer_fields', form: beer %>
-            <% end %>
-          </template>
         </div>
       </div>
 
@@ -49,18 +72,12 @@
 
     <div class="card-footer text-center">
       <div class="mb-3">
-        <% if brewery.persisted? %>
-          <div class="float-end">
-            <%= link_to 'Destroy', brewery, method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
-          </div>
-        <% end %>
-
         <%= form.submit class: 'btn btn-primary btn-lg' %>
 
         <% if brewery.persisted? %>
-          <%= link_to "Cancel", brewery, class: "btn btn-link" %>
+          <%= link_to "Cancel", brewery, class: "btn btn-danger btn-lg" %>
         <% else %>
-          <%= link_to "Cancel", breweries_path, class: "btn btn-link" %>
+          <%= link_to "Cancel", breweries_path, class: "btn btn-danger btn-lg" %>
         <% end %>
       </div>
     </div>

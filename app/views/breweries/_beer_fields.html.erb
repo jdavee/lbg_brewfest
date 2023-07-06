@@ -2,7 +2,9 @@
   <div class="card mb-3">
     <div class="card-header d-flex justify-content-between align-items-center">
       Beer
-      <%= link_to "Remove", "#", data: {action: "click->nested-form#remove_association" } %>
+      <%= link_to "#", data: {action: "click->nested-form#remove_association" }, class: 'text-danger' do %>
+        <i class="fa fa-trash"></i>
+      <% end %>
     </div>
     <div class="card-body">
       <div class="mb-3">

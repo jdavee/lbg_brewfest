@@ -4,8 +4,8 @@ export default class extends Controller {
   static targets = ["add_item", "template"]
 
   add_association(event) {
-    event.preventDefault()
-    var content = this.templateTarget.innerHTML.replace(/TemplateRecord/g, Math.floor(Math.random() * 20))
+    event.preventDefault()  
+    var content = this.templateTarget.innerHTML.replace(/TEMPLATE_RECORD/g, new Date().valueOf())
     this.add_itemTarget.insertAdjacentHTML('beforebegin', content)
   }
 

@@ -27,6 +27,9 @@
 
 /public/assets
 
+# Ignore all instances of DS_Store metadata files
+**/.DS_Store
+
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 /config/database.yml
