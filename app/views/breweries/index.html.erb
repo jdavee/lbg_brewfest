@@ -1,43 +1,35 @@
-
-
-
-<div class="row">
-  <div class="col-12 text-center">
-    <h1>2023 Breweries and Beers</h1>
+<div class="container">
+  <div class="d-flex justify-content-between align-items-center mb-2">
+    <span></span>
+    <h1>2023 Breweries</h1>
+    <% if false %>
+      <%= link_to new_brewery_path, class: 'btn btn-primary' do %>
+        Add New Brewery
+      <% end %>
+    <% else %>
+      <span><span>
+    <% end %>
   </div>
 </div>
 
-<div class="row">
-  <div class="col-sm-12 text-end">
-  <%= link_to new_brewery_path, class: 'btn btn-primary' do %>
-    Add New Brewery
-  <% end %>
-  </div>
-</div>
-
-<div class="card mt-2">
-  <div class="table-responsive">
-    <table class="table table-striped table-bordered table-hover">
-      <thead>
-        <tr>
-          <th>Brewery Name</th>
-          <th>Member Name</th>
-          <th>Description</th>
-          <th># of Beers</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @breweries.each do |brewery| %>
-          <%= content_tag :tr, id: dom_id(brewery), class: dom_class(brewery) do %>
-            <td><%= brewery.name %></td>
-            <td><%= brewery.member_name %></td>
-            <td><%= brewery.description %></td>
-            <td><%= brewery&.beers.count %></td>
-            <td><%= link_to 'Show', brewery %></td>
-            
+<div class="container">
+  <div class="row text-center">
+    <% @breweries.each do |brewery| %>
+      <div class="col-xl-3 col-sm-6 mb-4">
+        <div class="bg-white rounded shadow-sm pt-3">
+          <% if false %>
+            <span class="d-block text-end px-3" style="font-size: 24px"><i class="fa fa-edit text-danger"></i></span>
           <% end %>
-        <% end %>
-      </tbody>
-    </table>
+          <%= image_tag asset_path('brewingIcon.png'), width: 100,  class: "img-fluid rounded-circle mb-3 img-thumbnail shadow-s" %>
+          <h5 class="mb-0"><%= brewery.name %></h5>
+          <span class="small text-uppercase text-muted"><%= brewery.member_name %></span>
+          <%= link_to brewery do%>
+            <div class="card-button mt-3">
+              <h5><%= brewery.beers.count %> Beers</h5>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>

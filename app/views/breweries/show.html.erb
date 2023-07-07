@@ -1,12 +1,52 @@
-<div class="page-header">
-  <%= link_to breweries_path, class: 'btn btn-default' do %>
-    All Breweries
-  <% end %>
-  <%= link_to edit_brewery_path(@brewery), class: 'btn btn-primary' do %>
-    Edit
-  <% end %>
-  <h1>Show brewery</h1>
+
+<div class="container">
+  <%= link_to "Back to All Breweries", breweries_path, class: "btn btn-primary"%>
+
+  <hr class="text-primary border-5 opacity-100" />
+  <div class="text-center">
+    <%= image_tag asset_path('brewingIcon.png'), width: 80, class: "d-inline img-thumbnail rounded-circle shadow-s align-middle"%>
+    <h1 class="align-middle d-inline" style="margin-left: 15px;"><%= @brewery.name %></h1>
+  </div>
+  <hr class="text-primary border-5 opacity-100" />
 </div>
 
-<dl class="dl-horizontal">
-</dl>
+<div class="container">
+  <div class="row text-center justify-content-center">
+    <% @brewery.beers.each do |beer| %>
+      <div class="col-xl-3 col-sm-6 mb-4 d-flex flex-row align-items-stretch">
+        <div class="bg-white rounded shadow-sm pt-3 w-100">
+          <div class="d-flex flex-column justify-content-between h-100">
+            <div>
+              <% if false %>
+                <span class="d-block text-end px-3" style="font-size: 24px"><i class="fa fa-edit text-danger"></i></span>
+              <% end %>
+              <%= image_tag asset_path('beer_mug_icon.png'), width: 100,  class: "img-fluid rounded-circle mb-3 img-thumbnail shadow-s" %>
+              <h5 class="mb-0"><%= beer.name %></h5>
+              <span class="small text-uppercase text-muted"><%= beer.style %></span>
+            </div>
+            <div class="mt-auto">
+              <div class="border-top border-3 border-primary mt-2"></div>
+              <div class="bg-primary p-2 text-light border-top border-bottom" style="min-height: 25px;">
+                <%= beer.description %>
+              </div>
+              <div class="p-2 text-primary d-flex justify-content-between border-top border-3 border-primary">
+                <b><%= beer.ibu %> IBU</b>
+                <b><%= beer.abv%>% ABV</b>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <div class="col-xl-3 col-sm-6 mb-4 d-flex flex-row align-items-stretch" style="min-height: 275px">
+      <div class="bg-white opacity-50 rounded shadow-sm pt-3 w-100 border border-2 border-dashed border-danger" style="border-style: dashed !important">
+        <%= link_to new_beer_path, class: "text-decoration-none" do %>
+          <div class="d-flex flex-column justify-content-center h-100 text-danger">
+            <i class="fa fa-2x fa-plus-circle"></i>
+            Add Beer
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
