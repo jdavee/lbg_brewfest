@@ -13,6 +13,7 @@ class UserResource < Madmin::Resource
   attribute :created_at, form: false
   attribute :updated_at, form: false
   attribute :avatar, index: false
+  attrigbute :current_member, index: false
 
   # Associations
   attribute :notifications

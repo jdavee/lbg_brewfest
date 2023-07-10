@@ -1,5 +1,6 @@
 class BreweriesController < ApplicationController
   before_action :set_brewery, only: %i[ show edit update destroy ]
+  before_action :require_admin, :only => [:new, :create, :edit, :update]
 
   # GET /breweries or /breweries.json
   def index
