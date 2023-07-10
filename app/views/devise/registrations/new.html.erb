@@ -27,12 +27,17 @@
           <hr class="text-primary border-3 opacity-100" />
 
           <div class="mb-4" data-controller="visibility">
-          <label class="mb-1 d-block">Are you a current LBG member?</label>
+          <label class="d-block">Are you a current LBG member?</label>
+          <span class="small text-danger d-block mb-3"> * Membership required to submit beer donations</span>
           <%= content_tag("a", "Yes", class: "btn btn-outline-primary", "data-action": "visibility#showTargets", "data-visibility-target": "yes") %>
           <%= content_tag("a", "No", class: "btn btn-primary", "data-action": "visibility#hideTargets", "data-visibility-target": "no") %>
             <div class="mt-2" data-visibility-target="hideable" hidden>
               <%= f.text_field :lbg_secret, autofocus: false, class: 'form-control', placeholder: "Enter LBG Secret Phrase", id: "test" %>
-              <span class="small text-danger mt-2">* You must enter the secret phrase in order to submit beer donations.  If you don't know the secret phrase, please reach out to an LBG officer.</span> 
+              <span class="small text-danger mt-2">
+                * You must enter the secret phrase in order to submit beer donations.  If you don't know the secret phrase, please
+                <a href="mailto:info@lawrencebrewers.org">contact us</a>
+                or reach out to an LBG officer.
+              </span> 
             </div>
           </div>
 

@@ -21,6 +21,9 @@ class BeersController < ApplicationController
 
   # GET /beers/1/edit
   def edit
+    if params.has_key?(:brewery_id)
+      @brewery = Brewery.find(params[:brewery_id])
+    end
   end
 
   # POST /beers or /beers.json
@@ -42,7 +45,7 @@ class BeersController < ApplicationController
   def update
     respond_to do |format|
       if @beer.update(beer_params)
-        format.html { redirect_to beer_url(@beer), notice: "Beer was successfully updated." }
+        format.html { redirect_to brewery_url(@beer.brewery), notice: "Beer was successfully updated." }
         format.json { render :show, status: :ok, location: @beer }
       else
         format.html { render :edit, status: :unprocessable_entity }

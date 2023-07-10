@@ -15,20 +15,28 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     super do 
       if resource.lbg_secret == 'LBGBrewDay2023!'
-        resource.update_columns(current_member: true)
+        if resource.save
+          resource.update_columns(current_member: true)
+        end
       end
     end
   end
 
   # GET /resource/edit
-  # def edit
-  #   super
-  # end
+  def edit
+    super do
+      resource.lbg_secret = params[:lbg_secret]
+    end
+  end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+    super do
+      if resource.lbg_secret == 'LBGBrewDay2023!'
+        resource.update_columns(current_member: true)
+      end
+    end
+  end
 
   # DELETE /resource
   # def destroy

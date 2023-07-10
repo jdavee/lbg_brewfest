@@ -11,32 +11,52 @@
         <div class="card-body">
 
           <div class="mb-3">
+            <label class="text-primary">Full Name</label>
             <%= f.text_field :name, autofocus: false, class: 'form-control', placeholder: "Full name" %>
           </div>
 
           <div class="mb-3">
+            <label class="text-primary">Email</label>
             <%= f.email_field :email, class: 'form-control', placeholder: 'Email Address' %>
           </div>
+          
+          <div class="mb-3">
+            <label class="text-primary">Change Password</label>
+            <p class="form-text text-muted"><small>Leave password blank if you don't want to change it</small></p>
+            <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'New Password'  %>
+            <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control mt-1', placeholder: 'Confirm New Password'  %>
+          </div>
+
+          <% unless current_user.current_member? %>
+            <hr class="text-primary border-3 opacity-100" />
+            <div class="mb-3" data-controller="visibility">
+              <label class="mb-1 d-block text-primary">Are you a current LBG member?</label>
+              <%= content_tag("a", "Yes", class: "btn btn-outline-primary", "data-action": "visibility#showTargets", "data-visibility-target": "yes") %>
+              <%= content_tag("a", "No", class: "btn btn-primary", "data-action": "visibility#hideTargets", "data-visibility-target": "no") %>
+              <div class="mt-2" data-visibility-target="hideable" hidden>
+                <%= f.text_field :lbg_secret, autofocus: false, class: 'form-control', placeholder: "Enter LBG Secret Phrase", id: "test" %>
+                <span class="small text-danger mt-2">
+                * You must enter the secret phrase in order to submit beer donations.  If you don't know the secret phrase, please
+                <a href="mailto:info@lawrencebrewers.org">contact us</a>
+                or reach out to an LBG officer.
+              </span> 
+              </div>
+            </div>
+            <hr class="text-primary border-3 opacity-100" />
+          <% end %>
 
           <div class="mb-3">
-            <%= f.label :avatar, class: "form-label" %>
+            <%= f.label :avatar, class: "form-label text-primary d-block" %>
             <%= f.file_field :avatar, accept:'image/*' %>
           </div>
 
-          <%= image_tag avatar_path(f.object), class: "rounded border shadow-sm d-block mx-auto my-3" %>
+          <%= image_tag avatar_path(f.object), class: "rounded border shadow-sm d-block mx-auto mt-3 mb-4" %>
 
           <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
             <div class="alert alert-warning">Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
           <% end %>
 
-          <div class="mb-3">
-            <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Password'  %>
-            <p class="form-text text-muted"><small>Leave password blank if you don't want to change it</small></p>
-          </div>
-
-          <div class="mb-3">
-            <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder: 'Confirm Password'  %>
-          </div>
+          <hr class="text-primary border-3 opacity-100" />
 
           <div class="mb-3">
             <%= f.password_field :current_password, autocomplete: "off", class: 'form-control', placeholder: 'Current Password'  %>

@@ -1,18 +1,25 @@
-<% if current_user.current_member? %>
-  <div class="container mb-4">
-    <% if current_user.breweries.empty? || current_user.beers.empty?%>
-      <div class="text-center">
-        <h1 class="text-primary">Ready to donate some beer?</h1>
-        <% if current_user.breweries.empty? %>
-          <%= link_to "Create Your Brewery", new_brewery_path, class: 'btn btn-danger btn-lg py-3 px-5 border-primary' %>
-        <% else %>
-          <%= link_to "Add Beers", (current_user.breweries.count == 1 ? new_beer_path(brewery_id: current_user.breweries.last.id) : new_beer_path), class: 'btn btn-danger btn-lg py-3 px-5 border-3 border-primary' %>
-        <% end %>
-      </div>
-      <hr class="text-primary border-3 opacity-100" />
+<div class="container mb-4 text-center">
+  <% if current_user.nil? %>
+    <h1 class="text-primary">Ready to donate some beer?</h1>
+    <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-danger btn-lg py-3 px-5 border-primary' %>
+    <%= link_to "Log In", new_user_session_path, class: 'btn btn-danger btn-lg py-3 px-5 border-primary' %>
+    <span class="small text-primary d-block m-1">
+      * You will need the LBG Secret password to gain access to beer management.
+      <a href="mailto:info@lawrencebrewers.org">Contact us</a>
+      or reach out to an LBG officer for the password.  
+    </span>
+    <hr class="text-primary border-3 opacity-100" />
+  <% elsif current_user.current_member? && (current_user.breweries.empty? || current_user.beers.empty?)%>
+    <h1 class="text-primary">Ready to donate some beer?</h1>
+    <% if current_user.breweries.empty? %>
+      <%= link_to "Create Your Brewery", new_brewery_path, class: 'btn btn-danger btn-lg py-3 px-5 border-primary' %>
+    <% else %>
+      <%= link_to "Add Beers", (current_user.breweries.count == 1 ? new_beer_path(brewery_id: current_user.breweries.last.id) : new_beer_path), class: 'btn btn-danger btn-lg py-3 px-5 border-3 border-primary' %>
     <% end %>
-  </div>
-<% end %>
+    <hr class="text-primary border-3 opacity-100" />
+  <% end %>
+</div>
+
 
 <div class="text-center mb-4">
   <%= image_tag asset_path('BrewFest_Flyer_2023.jpg'), style: 'height: auto; width: 50%;', class: "rounded" %>
