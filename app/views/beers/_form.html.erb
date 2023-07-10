@@ -10,44 +10,57 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="mb-3">
-    <%= form.text_field :name, autofocus: false, class: 'form-control', placeholder: "Beer Name" %>
-  </div>
-
-  <div class="mb-3">
-    <%= form.text_field :style, autofocus: false, class: 'form-control', placeholder: "Beer Style" %>
-  </div>
-
-  <div class="mb-3">
-    <%= form.number_field :abv, step: 0.1, max: 20, autofocus: false, class: 'form-control', placeholder: "ABV" %>
-  </div>
-
-  <div class="mb-3">
-    <%= form.number_field :ibu, step: 1, autofocus: false, class: 'form-control', placeholder: "IBU" %>
-  </div>
-
-  <div class="mb-3">
-    <%= form.text_area :description, autofocus: false, class: 'form-control', placeholder: "Description" %>
-  </div>
-
-  <div class="mb-3">
-    <%= form.text_field :untappd_link, autofocus: false, class: 'form-control', placeholder: "Untappd Url" %>
-  </div>
-
-  <div class="mb-3">
-    <% if beer.persisted? %>
-      <div class="float-end">
-        <%= link_to 'Destroy', beer, method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
+  
+  <div class="card">
+    <div class="card-header d-flex justify-content-between">
+      <h5 class="my-auto">
+        <%= beer.new_record? ? 'Create New Beer' : 'Edit Beer' %>
+      </h5>
+      <% if beer.persisted? %>
+        <%= link_to beer, method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } do %>
+          <i class="fa fa-trash"></i>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="card-body">
+      <% if !@brewery.nil?%>
+        <%= form.hidden_field :brewery_id, value: @brewery.id %>
+      <% else %>
+        <div class="mb-3">
+          <label>Select Brewery</label>
+          <%= form.select :brewery_id, current_user.breweries.collect {|b| [b.name, b.id]}, {}, {class: 'form-select'} %>
+        </div>
+        <hr class="text-primary border-3 opacity-100" />
+      <% end %>
+      <%= form.hidden_field :user_id, value: current_user.id %>
+      <div class="mb-3">
+        <%= form.text_field :name, autofocus: false, class: 'form-control', placeholder: "Beer Name" %>
       </div>
-    <% end %>
 
-    <%= form.submit class: 'btn btn-primary' %>
+      <div class="mb-3">
+        <%= form.text_field :style, autofocus: false, class: 'form-control', placeholder: "Beer Style" %>
+      </div>
 
-    <% if beer.persisted? %>
-      <%= link_to "Cancel", beer, class: "btn btn-link" %>
-    <% else %>
-      <%= link_to "Cancel", beers_path, class: "btn btn-link" %>
-    <% end %>
+      <div class="mb-3">
+        <%= form.number_field :abv, step: 0.1, max: 20, autofocus: false, class: 'form-control', placeholder: "ABV" %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.number_field :ibu, step: 1, autofocus: false, class: 'form-control', placeholder: "IBU" %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.text_area :description, autofocus: false, class: 'form-control', placeholder: "Description" %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.text_field :untappd_link, autofocus: false, class: 'form-control', placeholder: "Untappd Url" %>
+      </div>
+    </div>
+    
+    <div class="card-footer text-center">
+      <%= form.submit class: 'btn btn-primary btn-lg' %>
+      <%= link_to "Cancel", breweries_path, class: "btn btn-danger btn-lg" %>
+    </div>
   </div>
 <% end %>

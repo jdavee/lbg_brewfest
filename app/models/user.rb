@@ -11,4 +11,6 @@ class User < ApplicationRecord
 
   has_many :notifications, as: :recipient, dependent: :destroy
   has_many :services
+  has_many :breweries
+  has_many :beers
 end

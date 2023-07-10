@@ -1,3 +1,19 @@
-<div class="text-center">
+<% if current_user.current_member? %>
+  <div class="container mb-4">
+    <% if current_user.breweries.empty? || current_user.beers.empty?%>
+      <div class="text-center">
+        <h1 class="text-primary">Ready to donate some beer?</h1>
+        <% if current_user.breweries.empty? %>
+          <%= link_to "Create Your Brewery", new_brewery_path, class: 'btn btn-danger btn-lg py-3 px-5 border-primary' %>
+        <% else %>
+          <%= link_to "Add Beers", (current_user.breweries.count == 1 ? new_beer_path(brewery_id: current_user.breweries.last.id) : new_beer_path), class: 'btn btn-danger btn-lg py-3 px-5 border-3 border-primary' %>
+        <% end %>
+      </div>
+      <hr class="text-primary border-3 opacity-100" />
+    <% end %>
+  </div>
+<% end %>
+
+<div class="text-center mb-4">
   <%= image_tag asset_path('BrewFest_Flyer_2023.jpg'), style: 'height: auto; width: 50%;', class: "rounded" %>
 </div>

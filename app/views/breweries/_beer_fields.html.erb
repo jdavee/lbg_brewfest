@@ -9,6 +9,11 @@
     <div class="card-body">
       <div class="mb-3">
         <%= form.hidden_field :_destroy %>
+        <% if current_user.admin? %>
+
+        <% else %>
+          <%=form.hidden_field :user_id, value: current_user.id %>
+        <% end %>
         <%= form.text_field :name, autofocus: false, class: 'form-control', placeholder: "Beer Name" %>
       </div>
 

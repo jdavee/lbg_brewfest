@@ -1,6 +1,6 @@
 class BreweriesController < ApplicationController
   before_action :set_brewery, only: %i[ show edit update destroy ]
-  before_action :require_admin, :only => [:new, :create, :edit, :update]
+  before_action :require_current_member, :only => [:new, :create, :edit, :update, :destroy]
 
   # GET /breweries or /breweries.json
   def index
@@ -67,6 +67,6 @@ class BreweriesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def brewery_params
-      params.require(:brewery).permit(:name, :member_name, :description, beers_attributes: [:_destroy, :id, :brewery_id, :name, :style, :abv, :ibu, :description, :untappd_link])
+      params.require(:brewery).permit(:user_id, :name, :member_name, :description, beers_attributes: [:_destroy, :id, :brewery_id, :user_id, :name, :style, :abv, :ibu, :description, :untappd_link])
     end
 end

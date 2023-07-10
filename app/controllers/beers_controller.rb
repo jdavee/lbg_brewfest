@@ -1,5 +1,6 @@
 class BeersController < ApplicationController
   before_action :set_beer, only: %i[ show edit update destroy ]
+  before_action :require_current_member, :only => [:new, :create, :edit, :update, :destroy]
 
   # GET /beers or /beers.json
   def index
@@ -13,6 +14,9 @@ class BeersController < ApplicationController
   # GET /beers/new
   def new
     @beer = Beer.new
+    if params.has_key?(:brewery_id)
+      @brewery = Brewery.find(params[:brewery_id])
+    end
   end
 
   # GET /beers/1/edit
@@ -25,7 +29,7 @@ class BeersController < ApplicationController
 
     respond_to do |format|
       if @beer.save
-        format.html { redirect_to beer_url(@beer), notice: "Beer was successfully created." }
+        format.html { redirect_to brewery_url(@beer.brewery), notice: "Beer was successfully created." }
         format.json { render :show, status: :created, location: @beer }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -65,6 +69,6 @@ class BeersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def beer_params
-      params.fetch(:beer, {})
+      params.require(:beer).permit(:user_id, :brewery_id, :name, :style, :abv, :ibu, :description, :untappd_link)
     end
 end

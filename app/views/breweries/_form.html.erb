@@ -23,6 +23,11 @@
       <% end %>
     </div>
     <div class="card-body">
+      <% if current_user.admin? %>
+       
+      <% else %>
+       <%= form.hidden_field :user_id, value: current_user.id %>
+      <% end %>
       <div class="mb-3">
         <%= form.text_field :name, autofocus: false, class: 'form-control', placeholder: "Brewery Name" %>
       </div>
@@ -71,15 +76,13 @@
     </div>
 
     <div class="card-footer text-center">
-      <div class="mb-3">
-        <%= form.submit class: 'btn btn-primary btn-lg' %>
+      <%= form.submit class: 'btn btn-primary btn-lg' %>
 
-        <% if brewery.persisted? %>
-          <%= link_to "Cancel", brewery, class: "btn btn-danger btn-lg" %>
-        <% else %>
-          <%= link_to "Cancel", breweries_path, class: "btn btn-danger btn-lg" %>
-        <% end %>
-      </div>
+      <% if brewery.persisted? %>
+        <%= link_to "Cancel", brewery, class: "btn btn-danger btn-lg" %>
+      <% else %>
+        <%= link_to "Cancel", breweries_path, class: "btn btn-danger btn-lg" %>
+      <% end %>
     </div>
   </div>
 <% end %>

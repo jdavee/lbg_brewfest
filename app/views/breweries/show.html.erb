@@ -1,6 +1,18 @@
 
 <div class="container">
-  <%= link_to "Back to All Breweries", breweries_path, class: "btn btn-primary"%>
+  <div class="row">
+    <div class="col-6 text-start">
+      <%= link_to "All Breweries", breweries_path, class: "btn btn-primary"%>
+    </div>
+    <div class="col-6 text-end">
+      <% if @brewery.user_id == current_user.id%>
+        <%= link_to edit_brewery_path(@brewery), class: "btn btn-primary" do %>
+          <i class="fa fa-edit"></i>
+          Edit Brewery
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 
   <hr class="text-primary border-5 opacity-100" />
   <div class="text-center">
@@ -17,7 +29,7 @@
         <div class="bg-white rounded shadow-sm pt-3 w-100">
           <div class="d-flex flex-column justify-content-between h-100">
             <div>
-              <% if false %>
+              <% if beer.user_id == current_user.id %>
                 <span class="d-block text-end px-3" style="font-size: 24px"><i class="fa fa-edit text-danger"></i></span>
               <% end %>
               <%= image_tag asset_path('beer_mug_icon.png'), width: 100,  class: "img-fluid rounded-circle mb-3 img-thumbnail shadow-s" %>
@@ -40,7 +52,7 @@
     <% end %>
     <div class="col-xl-3 col-sm-6 mb-4 d-flex flex-row align-items-stretch" style="min-height: 275px">
       <div class="bg-white opacity-50 rounded shadow-sm pt-3 w-100 border border-2 border-dashed border-danger" style="border-style: dashed !important">
-        <%= link_to new_beer_path, class: "text-decoration-none" do %>
+        <%= link_to new_beer_path(brewery_id: @brewery.id), class: "text-decoration-none" do %>
           <div class="d-flex flex-column justify-content-center h-100 text-danger">
             <i class="fa fa-2x fa-plus-circle"></i>
             Add Beer
