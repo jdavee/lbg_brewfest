@@ -25,15 +25,18 @@
             <span>Event Details</span>
           <% end %>
           <div id="event-dropdown" class="dropdown-menu dropdown-menu-end" aria-labelledby="navbar-dropdown">
-            <%= link_to "General Info", root_path, class: "dropdown-item" %>
-            <div class="dropdown-divider"></div>
-            <%= link_to "Location", root_path, class: "dropdown-item" %>
-            <div class="dropdown-divider"></div>
-            <%= link_to "Schedule", root_path, class: "dropdown-item" %>
-            <div class="dropdown-divider"></div>
-            <%= link_to "Camping", root_path, class: "dropdown-item" %>
-            <div class="dropdown-divider"></div>
-            <%= link_to "Rules", root_path, class: "dropdown-item" %>
+            <span class="dropdown-item">Coming Soon...</span>
+            <% if false %>
+              <%= link_to "General Info", root_path, class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Location", root_path, class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Schedule", root_path, class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Camping", root_path, class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Rules", root_path, class: "dropdown-item" %>
+            <% end %>
           </div>
         </li>
         <li class="nav-item dropdown">
@@ -42,16 +45,21 @@
           <% end %>
           <div id="beer-dropdown" class="dropdown-menu dropdown-menu-end" aria-labelledby="navbar-dropdown">
             <%= link_to "Participating Breweries", breweries_path, class: "dropdown-item" %>
-            <div class="dropdown-divider"></div>
-            <%= link_to "Flight Schedule", root_path, class: "dropdown-item" %>
-            <div class="dropdown-divider"></div>
-            <%= link_to "Track and Rate Beers", root_path, class: "dropdown-item" %>
+            <% if false %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Flight Schedule", root_path, class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Track and Rate Beers", root_path, class: "dropdown-item" %>
+            <% end %>
           </div>
         </li>
-        <li class="nav-item">
-          <%= link_to "#", class: "nav-link text-light" do %>
+        <li class="nav-item dropdown">
+          <%= link_to "#", class: "nav-link text-light dropdown-toggle", data: { target: "music-dropdown", bs_toggle: "dropdown"}, aria: {haspopup: true, expanded: false} do %>
             <span>Live Music</span>
           <% end %>
+          <div id="music-dropdown" class="dropdown-menu dropdown-menu-end" aria-labelledby="navbar-dropdown">
+            <span class="dropdown-item">Coming Soon...</span>
+          </div>
         </li>
 
         <li class="nav-item"><%= link_to "Announcements", announcements_path, class: "nav-link text-light #{unread_announcements(current_user)}" %></li>
