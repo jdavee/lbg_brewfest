@@ -32,13 +32,15 @@
         </div>
         <hr class="text-primary border-3 opacity-100" />
       <% end %>
+
       <%= form.hidden_field :user_id, value: current_user.id %>
+
       <div class="mb-3">
         <%= form.text_field :name, autofocus: false, class: 'form-control', placeholder: "Beer Name" %>
       </div>
 
-      <div class="mb-3">
-        <%= form.select :style, grouped_options_for_select(@beer_styles), {include_blank: "Beer Style"}, {class: 'form-select', placeholder: 'Beer Style'} %>
+      <div class="mb-3" data-controller="select">
+        <%= form.select :style, @beer_styles, {include_blank: "Beer Styles"}, class:"form-select", "data-select-target": "tsField" %>
       </div>
 
       <div class="mb-3">

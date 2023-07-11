@@ -17,8 +17,8 @@
         <%= form.text_field :name, autofocus: false, class: 'form-control', placeholder: "Beer Name" %>
       </div>
 
-      <div class="mb-3">
-        <%= form.text_field :style, autofocus: false, class: 'form-control', placeholder: "Beer Style" %>
+      <div class="mb-3" data-controller="select">
+        <%= form.select :style, @beer_styles, {prompt: "Beer Styles"}, class:"form-select", "data-select-target": "tsField" %>
       </div>
 
       <div class="mb-3">

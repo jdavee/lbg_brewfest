@@ -15,10 +15,12 @@ class BreweriesController < ApplicationController
   def new
     @brewery = Brewery.new
     @brewery.beers.build
+    @beer_styles = helpers.beer_styles
   end
 
   # GET /breweries/1/edit
   def edit
+    @beer_styles = helpers.beer_styles
   end
 
   # POST /breweries or /breweries.json

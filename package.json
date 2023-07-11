@@ -15,6 +15,7 @@
     "esbuild-rails": "^1.0.7",
     "local-time": "^2.1.0",
     "sass": "^1.63.3",
+    "tom-select": "2.1.0",
     "trix": "^2.0.5"
   },
   "scripts": {

@@ -3,6 +3,7 @@ $primary: #771200;
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
 @import "jumpstart/announcements";
+@import "tom-select/dist/css/tom-select.bootstrap5";
 
 .bg-main-page {
     background-image: url('/assets/beerGradient.jpg');
