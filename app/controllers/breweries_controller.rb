@@ -1,7 +1,7 @@
 class BreweriesController < ApplicationController
   before_action :set_brewery, only: %i[ show edit update destroy ]
   before_action :require_current_member, :only => [:new, :create, :edit, :update, :destroy]
-
+  skip_before_action :authenticate_user!, :only => [:index, :show]
   # GET /breweries or /breweries.json
   def index
     @breweries = Brewery.all

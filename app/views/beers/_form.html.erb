@@ -38,7 +38,7 @@
       </div>
 
       <div class="mb-3">
-        <%= form.text_field :style, autofocus: false, class: 'form-control', placeholder: "Beer Style" %>
+        <%= form.select :style, grouped_options_for_select(@beer_styles), {include_blank: "Beer Style"}, {class: 'form-select', placeholder: 'Beer Style'} %>
       </div>
 
       <div class="mb-3">

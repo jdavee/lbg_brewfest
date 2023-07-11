@@ -14,6 +14,7 @@ class BeersController < ApplicationController
   # GET /beers/new
   def new
     @beer = Beer.new
+    @beer_styles = helpers.beer_styles
     if params.has_key?(:brewery_id)
       @brewery = Brewery.find(params[:brewery_id])
     end
@@ -21,6 +22,7 @@ class BeersController < ApplicationController
 
   # GET /beers/1/edit
   def edit
+    @beer_styles = helpers.beer_styles
     if params.has_key?(:brewery_id)
       @brewery = Brewery.find(params[:brewery_id])
     end

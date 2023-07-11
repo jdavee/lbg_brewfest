@@ -5,26 +5,27 @@
       <%= link_to "All Breweries", breweries_path, class: "btn btn-primary"%>
     </div>
     <div class="col-6 text-end">
-      <% if @brewery.user_id == current_user.id%>
-        <%= link_to edit_brewery_path(@brewery), class: "btn btn-primary" do %>
-          <i class="fa fa-edit"></i>
-          Edit Brewery
+      <% unless current_user.nil? %>
+        <% if @brewery.user_id == current_user.id%>
+          <%= link_to edit_brewery_path(@brewery), class: "btn btn-primary" do %>
+            <i class="fa fa-edit"></i>
+            Edit Brewery
+          <% end %>
         <% end %>
       <% end %>
     </div>
   </div>
 
-  <hr class="text-primary border-5 opacity-100" />
-  <div class="text-center">
-    <%= image_tag asset_path('brewingIcon.png'), width: 80, class: "d-inline img-thumbnail rounded-circle shadow-s align-middle"%>
-    <h1 class="align-middle d-inline" style="margin-left: 15px;"><%= @brewery.name %></h1>
+  <div class="row justify-content-center">
+    <div class="col-8 text-center bg-light rounded p-3 border border-3 border-primary text-primary">
+      <%= image_tag asset_path('brewingIcon.png'), width: 80, class: "d-inline img-thumbnail rounded-circle shadow-s align-middle"%>
+      <h1 class="align-middle d-inline" style="margin-left: 15px;"><%= @brewery.name %></h1>
+    </div>
   </div>
-  <hr class="text-primary border-5 opacity-100" />
-</div>
 
-<div class="container">
+<div class="container mt-4">
   <div class="row text-center justify-content-center">
-    <% if @brewery.user != current_user && @brewery.beers.empty?%>
+    <% if (current_user.nil? || @brewery.user_id != current_user.id) && @brewery.beers.empty?%>
       <div class="mt-3 w-75 alert alert-warning alert-sm p-1">
         <h4 class="my-auto">There are no beers to display for this brewery.  Check back later.</h4>
       </h4>
@@ -34,9 +35,11 @@
           <div class="bg-white rounded shadow-sm pt-3 w-100">
             <div class="d-flex flex-column justify-content-between h-100">
               <div>
-                <% if beer.user == current_user %>
-                  <%= link_to (current_user.breweries.count == 1 ? edit_beer_path(beer, brewery_id: current_user.breweries.last.id) : edit_beer_path(beer)) do %>
-                    <span class="d-block text-end px-3" style="font-size: 24px"><i class="fa fa-edit text-danger"></i></span>
+                <% unless current_user.nil? %>
+                  <% if beer.user_id == current_user.id %>
+                    <%= link_to (current_user.breweries.count == 1 ? edit_beer_path(beer, brewery_id: current_user.breweries.last.id) : edit_beer_path(beer)) do %>
+                      <span class="d-block text-end px-3" style="font-size: 24px"><i class="fa fa-edit text-danger"></i></span>
+                    <% end %>
                   <% end %>
                 <% end %>
                 <%= image_tag asset_path('beer_mug_icon.png'), width: 100,  class: "img-fluid rounded-circle mb-3 img-thumbnail shadow-s" %>
@@ -58,17 +61,19 @@
         </div>
       <% end %>
     <% end %>
-    <% if @brewery.user == current_user %>
-      <div class="col-xl-3 col-sm-6 mb-4 d-flex flex-row align-items-stretch" style="min-height: 275px">
-        <div class="bg-white opacity-50 rounded shadow-sm pt-3 w-100 border border-2 border-dashed border-danger" style="border-style: dashed !important">
-          <%= link_to new_beer_path(brewery_id: @brewery.id), class: "text-decoration-none" do %>
-            <div class="d-flex flex-column justify-content-center h-100 text-danger">
-              <i class="fa fa-2x fa-plus-circle"></i>
-              Add Beer
-            </div>
-          <% end %>
+    <% unless current_user.nil? %>
+      <% if @brewery.user_id == current_user.id %>
+        <div class="col-xl-3 col-sm-6 mb-4 d-flex flex-row align-items-stretch" style="min-height: 275px">
+          <div class="bg-white opacity-50 rounded shadow-sm pt-3 w-100 border border-2 border-dashed border-danger" style="border-style: dashed !important">
+            <%= link_to new_beer_path(brewery_id: @brewery.id), class: "text-decoration-none" do %>
+              <div class="d-flex flex-column justify-content-center h-100 text-danger">
+                <i class="fa fa-2x fa-plus-circle"></i>
+                Add Beer
+              </div>
+            <% end %>
+          </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
 </div>
