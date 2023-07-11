@@ -61,7 +61,7 @@ class BeersController < ApplicationController
     @beer.destroy
 
     respond_to do |format|
-      format.html { redirect_to beers_url, notice: "Beer was successfully destroyed." }
+      format.html { redirect_to brewery_url(@beer.brewery), notice: "Beer was successfully destroyed." }
       format.json { head :no_content }
     end
   end

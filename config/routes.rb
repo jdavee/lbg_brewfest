@@ -3,7 +3,11 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
   resources :checkins
   resources :beers
-  resources :breweries
+  resources :breweries do 
+    collection do
+      get :manage
+    end
+  end
   draw :madmin
   get '/privacy', to: 'home#privacy'
   get '/terms', to: 'home#terms'

@@ -1,11 +1,9 @@
 <div class="container">
-
-    <span></span>
-    <div class="row justify-content-center mb-3">
-      <div class="col-8 text-center bg-light rounded p-3 border border-3 border-primary text-primary" >
-        <h1>2023 Breweries</h1>
-      </div>
+  <div class="row justify-content-center mb-3">
+    <div class="col-8 text-center bg-light rounded p-3 border border-3 border-primary text-primary" >
+      <h1>My Breweries</h1>
     </div>
+  </div>
 </div>
 
 <div class="container">
@@ -27,5 +25,15 @@
         </div>
       </div>
     <% end %>
+    <div class="col-xl-3 col-sm-6 mb-4">
+      <div class="bg-white opacity-50 rounded shadow-sm pt-3 w-100 border border-2 border-dashed border-danger" style="border-style: dashed !important; height: 250px">
+        <%= link_to new_brewery_path, class: "text-decoration-none" do %>
+          <div class="d-flex flex-column justify-content-center h-100 text-danger">
+            <i class="fa fa-2x fa-plus-circle"></i>
+            Add Brewery
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
