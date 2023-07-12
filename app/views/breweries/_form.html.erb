@@ -48,12 +48,12 @@
 
         <div class="row">
           <% if brewery.logo.attached? %>
-            <div class="col-2 text-center">
+            <div class="col-6 col-sm-4 col-md-3 col-xl-2 text-center">
               <span class="d-block">Current Image</span>
               <%= image_tag(brewery.logo, :width => "100%", "data-target": "image-preview.output" ) %>
             </div>
           <% end %>
-          <div class="col-2">
+          <div class="col-6 col-sm-4 col-md-3 col-xl-2">
             <span class="d-block text-center">New Image Preview</span>
             <%= image_tag("imagePreview.jpg", :width => "100%", "data-target": "image-preview.output" ) %>
           </div>

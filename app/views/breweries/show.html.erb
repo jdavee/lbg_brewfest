@@ -13,7 +13,7 @@
   
 
   <div class="row justify-content-center">
-    <div class="col-8 text-center bg-light rounded p-3 border border-3 border-primary text-primary">
+    <div class="col-12 text-center bg-light rounded p-3 border border-3 border-primary text-primary">
       <% if user_signed_in? %>
         <% if @brewery.user_id == current_user.id %>
           <%= link_to edit_brewery_path(@brewery) do %>
@@ -21,8 +21,8 @@
           <% end %>
         <% end %>
       <% end %>
-      <%= image_tag @brewery.logo.attached? ? @brewery.logo : asset_path('brewingIcon.png'), style: "width: 110px; height: 110px; border-radius: 50% !important;", class: "d-inline img-thumbnail shadow-s align-middle"%>
-      <h1 class="align-middle d-inline" style="margin-left: 15px;"><%= @brewery.name %></h1>
+      <%= image_tag @brewery.logo.attached? ? @brewery.logo : asset_path('brewingIcon.png'), style: "width: 110px; height: 110px; border-radius: 50% !important;", class: "img-thumbnail shadow-s"%>
+      <h1><%= @brewery.name %></h1>
     </div>
   </div>
 
@@ -34,7 +34,7 @@
       </h4>
     <% else %>
       <% @brewery.beers.each do |beer| %>
-        <div class="col-xl-3 col-sm-6 mb-4 d-flex flex-row align-items-stretch">
+        <div class="col-12 col-sm-6 col-md-4 col-xl-3 mb-4 d-flex flex-row align-items-stretch">
           <div class="bg-white rounded shadow-sm pt-3 w-100">
             <div class="d-flex flex-column justify-content-between h-100">
               <div>
@@ -71,7 +71,7 @@
     <% end %>
     <% if user_signed_in? %>
       <% if @brewery.user_id == current_user.id %>
-        <div class="col-xl-3 col-sm-6 mb-4 d-flex flex-row align-items-stretch" style="min-height: 275px">
+        <div class="col-12 col-sm-6 col-md-4 col-xl-3 mb-4 d-flex flex-row align-items-stretch" style="min-height: 275px">
           <div class="bg-white opacity-50 rounded shadow-sm pt-3 w-100 border border-2 border-dashed border-danger" style="border-style: dashed !important">
             <%= link_to new_beer_path(brewery_id: @brewery.id), class: "text-decoration-none" do %>
               <div class="d-flex flex-column justify-content-center h-100 text-danger">
