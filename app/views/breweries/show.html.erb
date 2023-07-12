@@ -21,7 +21,7 @@
           <% end %>
         <% end %>
       <% end %>
-      <%= image_tag asset_path('brewingIcon.png'), width: 80, class: "d-inline img-thumbnail rounded-circle shadow-s align-middle"%>
+      <%= image_tag @brewery.logo.attached? ? @brewery.logo : asset_path('brewingIcon.png'), style: "width: 110px; height: 110px; border-radius: 50% !important;", class: "d-inline img-thumbnail shadow-s align-middle"%>
       <h1 class="align-middle d-inline" style="margin-left: 15px;"><%= @brewery.name %></h1>
     </div>
   </div>
@@ -41,7 +41,7 @@
                 <% if user_signed_in? %>
                   <% if beer.user_id == current_user.id %>
                     <div class="d-flex justify-content-between px-3" style="font-size: 24px">
-                      <%= link_to (current_user.breweries.count == 1 ? edit_beer_path(beer, brewery_id: current_user.breweries.last.id) : edit_beer_path(beer)) do %>
+                      <%= link_to edit_beer_path(beer, brewery_id: beer.brewery_id) do %>
                         <i class="fa fa-edit text-danger"></i>
                       <% end %>
                       <%= link_to beer, method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } do %>
@@ -50,7 +50,7 @@
                     </div>
                   <% end %>
                 <% end %>
-                <%= image_tag asset_path('beer_mug_icon.png'), width: 100,  class: "img-fluid rounded-circle mb-3 img-thumbnail shadow-s" %>
+                <%= image_tag beer.label.attached? ? beer.label : asset_path('beer_mug_icon.png'), style: "width: 125px; height: 125px; border-radius: 50% !important ",  class: "mb-3 img-thumbnail shadow-s" %>
                 <h5 class="mb-0"><%= beer.name %></h5>
                 <span class="small text-uppercase text-muted"><%= beer.style %></span>
               </div>

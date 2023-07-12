@@ -36,6 +36,27 @@
       <div class="mb-3">
         <%= form.text_field :untappd_link, autofocus: false, class: 'form-control', placeholder: "Untappd Url" %>
       </div>
+
+      <div class="mb-3" data-controller="image-preview">
+        <div class="mb-3">
+          <%= form.label :label, class: "form-label text-primary" %><br>
+          <%= form.file_field :label, accept: 'image/*', :class => "form-control-file photo_upload", "data-target": "image-preview.input", "data-action": "image-preview#readURL"  %>
+        </div>
+
+        <div class="row">
+          <% if form.object.label.attached? %>
+            <div class="col-2 text-center">
+              <span class="d-block">Current Image</span>
+              <%= image_tag(form.object.label, :width => "100%", "data-target": "image-preview.output" ) %>
+            </div>
+          <% end %>
+          <div class="col-2">
+            <span class="d-block text-center">New Image Preview</span>
+            <%= image_tag("imagePreview.jpg", :width => "100%", "data-target": "image-preview.output" ) %>
+          </div>
+        </div>     
+      </div>
+
     </div>
   </div>
 </div>

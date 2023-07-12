@@ -16,7 +16,7 @@
           <% if false %>
             <span class="d-block text-end px-3" style="font-size: 24px"><i class="fa fa-edit text-danger"></i></span>
           <% end %>
-          <%= image_tag asset_path('brewingIcon.png'), width: 100,  class: "img-fluid rounded-circle mb-3 img-thumbnail shadow-s" %>
+          <%= image_tag brewery.logo.attached? ? brewery.logo : asset_path('brewingIcon.png'), style: "width: 125px; height: 125px; border-radius: 50% !important;", class: "mb-3 img-thumbnail shadow-s" %>
           <h5 class="mb-0"><%= brewery.name %></h5>
           <span class="small text-uppercase text-muted"><%= brewery.member_name %></span>
           <%= link_to brewery do%>
