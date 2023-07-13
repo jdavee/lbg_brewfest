@@ -1,0 +1,30 @@
+# fly.toml app configuration file generated for lbg-brewfest on 2023-07-12T15:45:36-05:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "lbg-brewfest"
+primary_region = "dfw"
+console_command = "/rails/bin/rails console"
+
+[deploy]
+  release_command = "./bin/rails db:prepare"
+
+[processes]
+  app = "./bin/rails server"
+  sidekiq = "bundle exec sidekiq"
+
+[env]
+  REDIS_URL="redis://default:e3632d8427a0450a81e39eff0ce63721@fly-damp-shape-3371.upstash.io"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+[[statics]]
+  guest_path = "/rails/public"
+  url_prefix = "/"
