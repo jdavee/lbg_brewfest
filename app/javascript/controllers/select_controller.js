@@ -6,6 +6,8 @@ export default class extends Controller {
   static targets = [ 'tsField' ];
 
   connect() {
-    new TomSelect(this.tsFieldTarget)
+    new TomSelect(this.tsFieldTarget, {
+      selectOnTab: true
+    })
   }
 }

@@ -69,7 +69,7 @@
           <% if form.object.label.attached? %>
             <div class="col-6 col-sm-4 col-md-3 col-xl-2 text-center">
               <span class="d-block">Current Image</span>
-              <%= image_tag(form.object.label, :width => "100%", "data-target": "image-preview.output" ) %>
+              <%= image_tag(form.object.label, :width => "100%") %>
             </div>
           <% end %>
           <div class="col-6 col-sm-4 col-md-3 col-xl-2">
@@ -83,7 +83,7 @@
     
     <div class="card-footer text-center">
       <%= form.submit class: 'btn btn-primary btn-lg' %>
-      <%= link_to "Cancel", brewery_path(@brewery), class: "btn btn-danger btn-lg" %>
+      <%= link_to "Cancel", brewery_path(@brewery.id), class: "btn btn-danger btn-lg" %>
     </div>
   </div>
 <% end %>

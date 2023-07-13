@@ -15,6 +15,8 @@ authenticate :user, lambda { |u| u.admin? } do
   mount Sidekiq::Web => '/sidekiq'
 
   namespace :madmin do
+    resources :breweries
+    resources :beers
     resources :impersonates do
       post :impersonate, on: :member
       post :stop_impersonating, on: :collection

@@ -31,6 +31,9 @@ class BeersController < ApplicationController
   # POST /beers or /beers.json
   def create
     @beer = Beer.new(beer_params)
+    @beer_styles = helpers.beer_styles
+    @brewery = Brewery.find(params[:beer][:brewery_id])
+
 
     respond_to do |format|
       if @beer.save
@@ -45,6 +48,9 @@ class BeersController < ApplicationController
 
   # PATCH/PUT /beers/1 or /beers/1.json
   def update
+    @beer_styles = helpers.beer_styles
+    @brewery = Brewery.find(beer.brewery_id)
+
     respond_to do |format|
       if @beer.update(beer_params)
         format.html { redirect_to brewery_url(@beer.brewery), notice: "Beer was successfully updated." }
