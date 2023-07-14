@@ -9,7 +9,7 @@ class User < ApplicationRecord
 
   def lbg_secret_is_correct
     unless self.lbg_secret.nil?
-      errors.add(:lbg_secret, "is incorrect") unless (self.lbg_secret == 'LBGBrewDay2023!' || self.lbg_secret.empty?)
+      errors.add(:lbg_secret, "is incorrect") unless (self.lbg_secret == 'lbgbrewday' || self.lbg_secret.empty?)
     end
   end
 

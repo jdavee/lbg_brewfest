@@ -14,7 +14,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super do 
-      if resource.lbg_secret == 'LBGBrewDay2023!'
+      if resource.lbg_secret == 'lbgbrewday'
         if resource.save
           resource.update_columns(current_member: true)
         end
@@ -32,7 +32,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # PUT /resource
   def update
     super do
-      if resource.lbg_secret == 'LBGBrewDay2023!'
+      if resource.lbg_secret == 'lbgbrewday'
         resource.update_columns(current_member: true)
       end
     end
