@@ -5,6 +5,7 @@ class BeerResource < Madmin::Resource
   attribute :style
   attribute :abv
   attribute :ibu
+  attribute :keg_type
   attribute :description
   attribute :label, index: false
   attribute :untappd_link

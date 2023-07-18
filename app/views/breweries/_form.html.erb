@@ -23,11 +23,7 @@
       <% end %>
     </div>
     <div class="card-body">
-      <% if current_user.admin? %>
-       
-      <% else %>
-       <%= form.hidden_field :user_id, value: current_user.id %>
-      <% end %>
+      <%= form.hidden_field :user_id, value: current_user.id %>
       <div class="mb-3">
         <%= form.text_field :name, autofocus: false, class: 'form-control', placeholder: "Brewery Name" %>
       </div>

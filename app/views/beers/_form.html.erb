@@ -51,6 +51,17 @@
         <%= form.number_field :ibu, step: 1, autofocus: false, class: 'form-control', placeholder: "IBU" %>
       </div>
 
+      <div class="mb-3 border border-1 rounded px-3 pb-3 pt-1">
+        <label class="text-primary mb-2 d-block">Type of Keg</label>
+        <div>
+          <%= form.radio_button :keg_type, "Ball Lock", id: 'ballLock', class: 'radio-group' %>
+          <label for="ballLock">Ball Lock</label>
+          <br/>
+          <%= form.radio_button :keg_type, "Pin Lock", id: 'pinLock', class: 'radio-group' %>
+          <label for="pinLock">Pin Lock</label>
+        </div>
+      </div>
+
       <div class="mb-3">
         <%= form.text_area :description, autofocus: false, class: 'form-control', placeholder: "Description" %>
       </div>

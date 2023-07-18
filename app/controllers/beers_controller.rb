@@ -49,7 +49,7 @@ class BeersController < ApplicationController
   # PATCH/PUT /beers/1 or /beers/1.json
   def update
     @beer_styles = helpers.beer_styles
-    @brewery = Brewery.find(beer.brewery_id)
+    @brewery = Brewery.find(@beer.brewery_id)
 
     respond_to do |format|
       if @beer.update(beer_params)
@@ -80,6 +80,6 @@ class BeersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def beer_params
-      params.require(:beer).permit(:user_id, :brewery_id, :name, :style, :abv, :ibu, :description, :untappd_link, :label)
+      params.require(:beer).permit(:user_id, :brewery_id, :name, :style, :abv, :ibu, :keg_type, :description, :untappd_link, :label)
     end
 end

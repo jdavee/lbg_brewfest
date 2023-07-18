@@ -26,6 +26,7 @@ class BreweriesController < ApplicationController
   # POST /breweries or /breweries.json
   def create
     @brewery = Brewery.new(brewery_params)
+    @beer_styles = helpers.beer_styles
 
     respond_to do |format|
       if @brewery.save
@@ -40,6 +41,7 @@ class BreweriesController < ApplicationController
 
   # PATCH/PUT /breweries/1 or /breweries/1.json
   def update
+    @beer_styles = helpers.beer_styles
     respond_to do |format|
       if @brewery.update(brewery_params)
         format.html { redirect_to brewery_url(@brewery), notice: "Brewery was successfully updated." }
@@ -73,6 +75,6 @@ class BreweriesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def brewery_params
-      params.require(:brewery).permit(:user_id, :name, :member_name, :description, :logo, beers_attributes: [:_destroy, :id, :brewery_id, :user_id, :name, :style, :abv, :ibu, :description, :untappd_link, :label])
+      params.require(:brewery).permit(:user_id, :name, :member_name, :description, :logo, beers_attributes: [:_destroy, :id, :brewery_id, :user_id, :name, :style, :abv, :ibu, :keg_type, :description, :untappd_link, :label])
     end
 end
