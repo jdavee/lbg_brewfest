@@ -8,12 +8,9 @@
           <h2 class="text-center">Sign Up</h2>
         </div>
         <div class="card-body">
-          <div class="mb-3">
-            <%= f.text_field :name, autofocus: false, class: 'form-control', placeholder: "Full name" %>
-          </div>
 
           <div class="mb-3">
-            <%= f.email_field :email, autofocus: false, class: 'form-control', placeholder: "Email Address" %>
+            <%= f.text_field :username, autofocus: false, class: 'form-control', placeholder: "Username" %>
           </div>
 
           <div class="mb-3">
@@ -32,12 +29,13 @@
           <%= content_tag("a", "Yes", class: "btn btn-outline-primary", "data-action": "visibility#showTargets", "data-visibility-target": "yes") %>
           <%= content_tag("a", "No", class: "btn btn-primary", "data-action": "visibility#hideTargets", "data-visibility-target": "no") %>
             <div class="mt-2" data-visibility-target="hideable" hidden>
+              <div class="alert alert-danger text-center">
+                <h5><b>Accounts have already been created for current LBG members. Please attempt <a href="/users/sign_in">logging in</a> first.</b></h5>  
+                <br/>
+                If you have recently become a member or are unable to login, then enter the secret phrase below to gain access to beer donation submission.
+                If you don't know the secret phrase, please <a href="mailto:info@lawrencebrewers.org">contact us</a> or reach out to an LBG officer.
+              </div>
               <%= f.text_field :lbg_secret, autofocus: false, class: 'form-control', placeholder: "Enter LBG Secret Phrase", id: "test" %>
-              <span class="small text-danger mt-2">
-                * You must enter the secret phrase in order to submit beer donations.  If you don't know the secret phrase, please
-                <a href="mailto:info@lawrencebrewers.org">contact us</a>
-                or reach out to an LBG officer.
-              </span> 
             </div>
           </div>
 

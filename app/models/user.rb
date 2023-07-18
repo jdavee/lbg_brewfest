@@ -1,10 +1,11 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :omniauthable
+  devise :database_authenticatable, :registerable, :rememberable, :omniauthable, authentication_keys: [:username]
 
   attr_accessor :lbg_secret
-  validates :name, presence: true
+  validates :username, presence: true, uniqueness: true
+  validates :password, presence: true, if: :password_required?
   validate :lbg_secret_is_correct
 
   def lbg_secret_is_correct
@@ -21,4 +22,8 @@ class User < ApplicationRecord
   has_many :services
   has_many :breweries
   has_many :beers
+
+  def password_required?
+    !persisted? || !password.nil? || !password_confirmation.nil?
+  end
 end

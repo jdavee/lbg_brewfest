@@ -1,5 +1,7 @@
 class AnnouncementsController < ApplicationController
+  skip_before_action :authenticate_user!, :only => [:index]
   before_action :mark_as_read, if: :user_signed_in?
+  
 
   def index
     @announcements = Announcement.order(published_at: :desc)
