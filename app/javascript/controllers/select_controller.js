@@ -7,7 +7,8 @@ export default class extends Controller {
 
   connect() {
     new TomSelect(this.tsFieldTarget, {
-      selectOnTab: true
+      selectOnTab: true,
+      maxOptions: null,
     })
   }
 }

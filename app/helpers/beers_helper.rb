@@ -291,6 +291,67 @@ module BeersHelper
             "Experimental Beer", 
           ]
       ],
+      [
+        "STANDARD CIDER AND PERRY",
+          [
+            "New World Cider", 
+            "English Cider",
+            "French Cider",
+            "New World Perry",
+            "Traditional Perry"
+          ]
+      ],
+      [
+        "SPECIALTY CIDER AND PERRY",
+          [
+            "New England Cider", 
+            "Cider with Other Fruit",
+            "Applewine",
+            "Ice Cider",
+            "Cider with Herbs/Spices",
+            "Specialty Cider/Perry"
+          ]
+      ],
+      [
+        "TRADITIONAL MEAD",
+          [
+            "Dry Mead", 
+            "Semi-Sweet Mead",
+            "Sweet Mead"
+          ]
+      ],
+      [
+        "FRUIT MEAD",
+          [
+            "Cyser", 
+            "Pyment",
+            "Berry Mead",
+            "Stone Fruit Mead",
+            "Melomel"
+          ]
+      ],
+      [
+        "SPICED MEAD",
+          [
+            "Fruit and Spice Mead", 
+            "Spice, Herb, or Vegetable Mead"
+          ]
+      ],
+      [
+        "SPECIALTY MEAD",
+          [
+            "Braggot", 
+            "Historical Mead",
+            "Experimental Mead"
+          ]
+      ],
+      [
+        "NON-ALCOHOLIC",
+          [
+            "Soda", 
+            "Sparkling Water"
+          ]
+      ],
     ]
 
     
