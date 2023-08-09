@@ -2,6 +2,12 @@ module BeersHelper
   def beer_styles
     [
       [
+        "TBD",
+        [
+          "To Be Declared"
+        ]
+      ],
+      [
         "STANDARD AMERICAN BEER",
           [
             "American Light Lager", 
