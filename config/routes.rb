@@ -1,6 +1,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  resources :flights
   resources :checkins
   resources :beers
   resources :breweries do 

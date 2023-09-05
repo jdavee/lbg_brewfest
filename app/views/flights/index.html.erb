@@ -1,0 +1,46 @@
+<div class="container">
+  <span></span>
+  <div class="row justify-content-center mb-3">
+    <div class="col-8 text-center bg-light rounded p-3 border border-3 border-primary text-primary" >
+      <h1>2023 Flights</h1>
+    </div>
+  </div>
+  <div class="row justify-content-center mb-3">
+    <div class="col-8 text-center">
+      <%= link_to 'Add New Flight', new_flight_path, class: 'btn btn-primary' %>
+    </div>
+  </div>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr class="text-center">
+        <th>Flight</th>
+        <th>Time</th>
+        <th>Duration</th>
+        <th>Beers</th>
+        <th>Unique Breweries</th>
+        <th><i class="fa fa-gears"></i></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @flights.order(:number).each do |flight| %>
+        <tr class="text-center">
+          <td><%= flight.number %></td>
+          <td><%= "#{flight.start_time.strftime("%l:%M %p")} - #{flight.end_time.strftime("%l:%M %p")}" %></td>
+          <td><%= ((flight.end_time - flight.start_time) / 1.hour) %> hrs</td>
+          <td><%= flight.beers.count %></td>
+          <td><%= Brewery.where(id: flight.beers.pluck(:brewery_id).uniq).count %>
+          <td>
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <%= link_to raw("<i class='fa fa-eye'></i>"), flight_path(flight), class: 'btn btn-primary' %>
+              <%= link_to raw("<i class='fa fa-trash'></i>"), flight_path(flight), class: 'btn btn-danger', method: :delete, data: {confirm: "Are you sure?"} %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

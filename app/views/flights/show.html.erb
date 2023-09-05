@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row text-center mb-2">
+    <div class="col-12">
+      <%= link_to "All Flights", flights_path, class: "btn btn-primary" %>
+      <%= link_to "Edit Flight", edit_flight_path(@flight), class: 'btn btn-primary' %>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-12 text-center bg-light rounded p-3 border border-3 border-primary text-primary">
+      <h1><%= "#{@flight.year} - Flight #{@flight.number}" %></h1>
+    </div>
+  </div>
+
+
+<dl class="dl-horizontal">
+</dl>

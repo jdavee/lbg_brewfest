@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_18_234418) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_19_043122) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -51,6 +51,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_18_234418) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "beer_styles", force: :cascade do |t|
+    t.string "category"
+    t.string "bjcp_id"
+    t.string "style"
+    t.string "flight_style"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "beers", force: :cascade do |t|
     t.integer "brewery_id"
     t.text "name"
@@ -63,6 +72,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_18_234418) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.string "keg_type"
+    t.integer "year"
+    t.integer "flight_id"
+    t.integer "beer_style_id"
   end
 
   create_table "breweries", force: :cascade do |t|
@@ -80,6 +92,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_18_234418) do
     t.boolean "sampled", default: false
     t.decimal "rating", precision: 2, scale: 1
     t.text "review"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "flights", force: :cascade do |t|
+    t.integer "year"
+    t.integer "number"
+    t.time "start_time"
+    t.time "end_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

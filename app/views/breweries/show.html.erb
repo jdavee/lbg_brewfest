@@ -52,7 +52,9 @@
                 <% end %>
                 <%= image_tag beer.label.attached? ? beer.label : asset_path('beer_mug_icon.png'), style: "width: 125px; height: 125px; border-radius: 50% !important ",  class: "mb-3 img-thumbnail shadow-s" %>
                 <h5 class="mb-0"><%= beer.name %></h5>
-                <span class="small text-uppercase text-muted"><%= beer.style %></span>
+                <% unless beer.beer_style_id.nil?%>
+                  <span class="small text-uppercase text-muted"><%= beer&.beer_style&.bjcp_id %> - <%= beer&.beer_style&.style %></span>
+                <% end %>
               </div>
               <div class="mt-auto">
                 <div class="border-top border-3 border-primary mt-2"></div>

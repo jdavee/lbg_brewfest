@@ -80,6 +80,6 @@ class BeersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def beer_params
-      params.require(:beer).permit(:user_id, :brewery_id, :name, :style, :abv, :ibu, :keg_type, :description, :untappd_link, :label)
+      params.require(:beer).permit(:user_id, :brewery_id, :name, :style, :beer_style_id, :abv, :ibu, :keg_type, :description, :untappd_link, :label)
     end
 end

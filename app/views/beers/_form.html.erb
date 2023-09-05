@@ -40,7 +40,7 @@
       </div>
 
       <div class="mb-3" data-controller="select">
-        <%= form.select :style, @beer_styles, {include_blank: "Beer Styles"}, class:"form-select", "data-select-target": "tsField" %>
+        <%= form.select :beer_style_id, grouped_options_for_select(BeerStyle.select_options_grouped_by_category), {include_blank: "Beer Styles"}, class:"form-select", "data-select-target": "tsField" %>
       </div>
 
       <div class="mb-3">
