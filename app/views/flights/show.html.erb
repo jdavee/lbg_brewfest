@@ -7,8 +7,47 @@
   </div>
 
   <div class="row justify-content-center">
-    <div class="col-12 text-center bg-light rounded p-3 border border-3 border-primary text-primary">
-      <h1><%= "#{@flight.year} - Flight #{@flight.number}" %></h1>
+    <div class="col-12 text-center bg-dark rounded p-3 border border-3 border-primary text-light">
+      <h1><%= "Flight #{@flight.number}" %></h1>
+    </div>
+  </div>
+  
+  <div class="row mt-3">
+    <div class="col-12 p-0">
+      <% @flight.beers.order(position: :asc).each do |beer| %>
+        <% checkin = Checkin.find_by(beer_id: beer.id, user_id: current_user.id) %>
+        <div class="<%= class_names({'bg-dark opacity-50' => checkin&.sampled == true}) %> card card-body mb-2 border border-5 border-primary border-bottom-0 border-top-0">
+          <div class="row text-center align-items-center">
+            <div class="col-2 col-md-1 p-1">
+              <div class="bg-primary rounded border border-warning border-3 text-left">
+                <h1 class="text-light my-0 p-1"><%= beer.position %></h1>
+              </div>
+            </div>
+            <div class="col-10 col-md-11 text-start">
+              <div class="row p-0 align-items-center">
+                <div class="col-3 col-md-2 p-0">
+                    <%= image_tag beer.label.attached? ? beer.label : asset_path('beer_mug_icon.png'), style: "border-radius: 50% !important; max-width: 100px;",  class: "w-100 img-thumbnail shadow-s" %>
+                </div>
+                <div class="col-8 my-auto">
+                  <h6 class="<%= class_names({'text-white': checkin&.sampled?}) %> text-primary my-0"><b><%= beer.name %></b></h6>
+                  <hr class="my-1 w-25 text-warning opacity-75" style="border-width: 2px; border-style: dashed"/>
+                  <span class="<%= class_names({'text-white': checkin&.sampled?}) %>"><%= beer.beer_style.style %></span>
+                </div>
+                <div class="col-1 form-check d-flex flex-column justify-content-center py-0 ps-0" data-controller="remote">
+                  <%= form_with(url: toggle_sampled_checkin_path(beer_id: beer.id, user_id: current_user.id), html: {data: {action: "ajax:success->remote#onPostSuccess"}}) do |f| %>
+                    <%= check_box_tag :sampled, true, checkin&.sampled || false, data:{action:"change->remote#update"}, class: "form-check-input p-2 p-md-3 border border-2 border-primary float-end" %>
+                    <%= submit_tag 'Submit', class: 'd-none'%>
+                  <% end %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 

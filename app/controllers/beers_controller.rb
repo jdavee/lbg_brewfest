@@ -1,5 +1,5 @@
 class BeersController < ApplicationController
-  before_action :set_beer, only: %i[ show edit update destroy ]
+  before_action :set_beer, only: %i[ show edit update destroy move ]
   before_action :require_current_member, :only => [:new, :create, :edit, :update, :destroy]
 
   # GET /beers or /beers.json
@@ -72,6 +72,11 @@ class BeersController < ApplicationController
     end
   end
 
+  def move
+    @beer.insert_at(params[:position].to_i)
+    head :ok
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_beer
@@ -80,6 +85,6 @@ class BeersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def beer_params
-      params.require(:beer).permit(:user_id, :brewery_id, :name, :style, :beer_style_id, :abv, :ibu, :keg_type, :description, :untappd_link, :label)
+      params.require(:beer).permit(:user_id, :brewery_id, :name, :style, :beer_style_id, :flight_id, :position, :year, :abv, :ibu, :keg_type, :description, :untappd_link, :label)
     end
 end

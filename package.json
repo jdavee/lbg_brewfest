@@ -16,6 +16,7 @@
     "flatpickr": "^4.6.13",
     "local-time": "^2.1.0",
     "sass": "^1.63.3",
+    "sortablejs": "^1.15.0",
     "tom-select": "2.1.0",
     "trix": "^2.0.5"
   },

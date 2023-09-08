@@ -47,6 +47,14 @@ class CheckinsController < ApplicationController
     end
   end
 
+  def toggle_sampled
+    @checkin = Checkin.find_or_create_by(beer_id: params[:beer_id], user_id: params[:user_id])
+    @checkin.sampled = params[:sampled]
+    @checkin.save
+    
+    redirect_back(fallback_location: flights_path)
+  end
+
   # DELETE /checkins/1 or /checkins/1.json
   def destroy
     @checkin.destroy

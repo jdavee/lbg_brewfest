@@ -2,8 +2,16 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
   resources :flights
-  resources :checkins
-  resources :beers
+  resources :checkins do
+    member do
+      post :toggle_sampled
+    end
+  end
+  resources :beers do
+    member do
+      patch :move
+    end
+  end
   resources :breweries do 
     collection do
       get :manage
