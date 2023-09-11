@@ -1,5 +1,6 @@
 # Below are the routes for madmin
 namespace :madmin do
+  resources :flights
   resources :announcements
   resources :notifications
   resources :services

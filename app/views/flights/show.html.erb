@@ -2,7 +2,6 @@
   <div class="row text-center mb-2">
     <div class="col-12">
       <%= link_to "All Flights", flights_path, class: "btn btn-primary" %>
-      <%= link_to "Edit Flight", edit_flight_path(@flight), class: 'btn btn-primary' %>
     </div>
   </div>
 
@@ -14,13 +13,15 @@
   
   <div class="row mt-3">
     <div class="col-12 p-0">
+      <% position = 0 %>
       <% @flight.beers.order(position: :asc).each do |beer| %>
+        <% position += 1 %>
         <% checkin = Checkin.find_by(beer_id: beer.id, user_id: current_user.id) %>
         <div class="<%= class_names({'bg-dark opacity-50' => checkin&.sampled == true}) %> card card-body mb-2 border border-5 border-primary border-bottom-0 border-top-0">
           <div class="row text-center align-items-center">
             <div class="col-2 col-md-1 p-1">
               <div class="bg-primary rounded border border-warning border-3 text-left">
-                <h1 class="text-light my-0 p-1"><%= beer.position %></h1>
+                <h1 class="text-light my-0 p-1"><%= position %></h1>
               </div>
             </div>
             <div class="col-10 col-md-11 text-start">

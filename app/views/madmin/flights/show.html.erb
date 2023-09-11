@@ -1,0 +1,67 @@
+<div class="md:flex items-center justify-between mb-4">
+  <h1 class="text-xl">
+    <%= link_to resource.friendly_name.pluralize, resource.index_path, class: "text-indigo-500" %>
+    /
+    <%= link_to resource.display_name(@record), resource.show_path(@record), class: "text-indigo-500 font-bold" %>
+  </h1>
+
+  <div class="flex gap-2 items-center px-4">
+    <% resource.member_actions.each do |action| %>
+      <%= instance_eval &action  %>
+    <% end %>
+    <%= link_to "Edit", resource.edit_path(@record), class: "block bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" %>
+    <%= button_to "Delete", resource.show_path(@record), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "bg-white hover:bg-gray-100 text-red-500 font-semibold py-2 px-4 border border-red-500 rounded shadow pointer-cursor" %>
+  </div>
+</div>
+
+<div class="divide-y">
+  <% resource.attributes.values.each do |attribute| %>
+    <% next if attribute.field.nil? %>
+    <% next unless attribute.field.visible?(action_name) %>
+
+    <div class="px-4 py-3 md:grid md:grid-cols-4 md:gap-4 md:px-6">
+      <div class="text-sm font-medium text-gray-500">
+        <%= attribute.field.attribute_name.to_s.titleize %>
+      </div>
+
+      <div class="md:col-span-3">
+      <% if attribute.name.to_s == 'start_time' %>
+          <%= @record.start_time.strftime('%l:%M %p') %>
+        <% elsif attribute.name.to_s == 'end_time' %>
+          <%= @record.end_time.strftime('%l:%M %p') %>
+        <% else %>
+          <%= render partial: attribute.field.to_partial_path("show"), locals: { field: attribute.field, record: @record, resource: resource } %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  
+  <h1 class="mt-3 mb-3">Change Flight Order (Drag/Drop):</h1>
+  <% position = 0 %>
+  <div data-controller="sortable">
+    <% @record.beers.order(position: :asc).each do |beer| %>
+      <% position += 1 %>
+      <%= content_tag :div, id: dom_id(beer), data: {url: main_app.move_beer_url(beer.id) } do %>
+        <div  class="w-2/3 mb-3 cursor-pointer">
+          <div class="border-r border-b border-l border-t border-gray-400  bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+            <div class="grid grid-cols-4 gap-4">
+              <h1 class="text-light my-0 p-1"><%= position %></h1>
+              <div class="text-sm">
+                <p class="text-gray-900 leading-none"><%= beer.name %></p>
+                <p class="text-gray-600"><%= beer.beer_style.style %></p>
+              </div>
+              <div class="text-sm ml-20">
+                <p class="text-gray-900 leading-none"><%= beer.brewery.name %></p>
+                <p class="text-gray-600"><%= beer.brewery.member_name %></p>
+              </div>
+              <div class="text-sm ml-20">
+                <p class="text-gray-900 leading-none"><%= beer.abv %>% ABV</p>
+                <p class="text-gray-600"><%= beer.ibu %> IBU</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

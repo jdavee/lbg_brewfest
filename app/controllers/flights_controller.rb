@@ -1,5 +1,5 @@
 class FlightsController < ApplicationController
-  before_action :set_flight, only: %i[ show edit update destroy ]
+  before_action :set_flight, only: %i[ show destroy ]
 
   # GET /flights or /flights.json
   def index
@@ -8,51 +8,6 @@ class FlightsController < ApplicationController
 
   # GET /flights/1 or /flights/1.json
   def show
-  end
-
-  # GET /flights/new
-  def new
-    @years = Flight.all.pluck(:year).uniq
-    unless @years.include?(Time.now.year)
-      @years << Time.now.year
-    end
-    @flight = Flight.new
-  end
-
-  # GET /flights/1/edit
-  def edit
-  end
-
-  # POST /flights or /flights.json
-  def create
-    @flight = Flight.new(flight_params)
-    @years = Flight.all.pluck(:year).uniq
-    unless @years.include?(Time.now.year)
-      @years << Time.now.year
-    end
-
-    respond_to do |format|
-      if @flight.save
-        format.html { redirect_to flight_url(@flight), notice: "Flight was successfully created." }
-        format.json { render :show, status: :created, location: @flight }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @flight.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /flights/1 or /flights/1.json
-  def update
-    respond_to do |format|
-      if @flight.update(flight_params)
-        format.html { redirect_to flight_url(@flight), notice: "Flight was successfully updated." }
-        format.json { render :show, status: :ok, location: @flight }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @flight.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # DELETE /flights/1 or /flights/1.json
@@ -73,6 +28,6 @@ class FlightsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def flight_params
-      params.require(:flight).permit(:year, :number, :start_time, :end_time)
+      params.require(:flight).permit(:year, :number, :start_time, :end_time, beer_ids: [])
     end
 end

@@ -13,8 +13,9 @@
       "@rails/activestorage": "https://unpkg.com/@rails/activestorage@<%= npm_rails_version %>/app/assets/javascripts/activestorage.esm.js",
       "flatpickr": "https://unpkg.com/flatpickr/dist/esm/index.js",
       "stimulus-flatpickr": "https://unpkg.com/stimulus-flatpickr@3.0.0-0/dist/index.m.js",
-      "tailwindcss-stimulus-components": "https://unpkg.com/tailwindcss-stimulus-components/dist/tailwindcss-stimulus-components.modern.js",
+      "tailwindcss-stimulus-components": "https://unpkg.com/tailwindcss-stimulus-components/dist/tailwindcss-stimulus-components.module.js",
       "tom-select": "https://unpkg.com/tom-select/dist/esm/tom-select.complete.js",
+      "sortablejs": "https://www.unpkg.com/sortablejs@1.15.0/modular/sortable.complete.esm.js",
       "trix": "https://unpkg.com/trix"
     }
   }
@@ -37,6 +38,43 @@
 
   import StimulusFlatpickr from "stimulus-flatpickr"
   application.register("flatpickr", StimulusFlatpickr)
+
+  import Sortable from "sortablejs"
+
+  application.register('sortable', class extends Controller {
+
+    connect() {
+      this.sortable = Sortable.create(this.element, {
+        animation: 150,
+        onEnd:  this.end.bind(this)
+      })
+    }
+
+    end(event) {
+      let data = new FormData()
+      let url = event.item.dataset.url
+      data.append("position", event.newIndex + 1)
+
+      for (var key of data.entries()) {
+        console.log(key[0] + ', ' + key[1])
+        console.log(event.item.dataset.url)
+      }
+
+      fetch(url, {
+        body: data,
+        method: 'PATCH',
+        dataType: "script",
+        headers: { 
+          "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").content
+        }
+      })
+      .then(function(response) {
+        if (response.status == 200) {
+          location.reload();
+        }
+      })
+    }
+  })
 
   import TomSelect from "tom-select"
 
