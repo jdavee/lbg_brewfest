@@ -7,9 +7,11 @@ class UserResource < Madmin::Resource
   attribute :current_member
   attribute :admin
   attribute :email
-  attribute :encrypted_password
-  attribute :reset_password_token
-  attribute :reset_password_sent_at
+  attribute :password, index: false, show: false, edit: false
+  attribute :password_confirmation, index: false, show: false, edit: false
+  attribute :encrypted_password, form: false
+  attribute :reset_password_token, form: false
+  attribute :reset_password_sent_at, form: false
   attribute :remember_created_at
   attribute :announcements_last_read_at
   attribute :created_at, form: false

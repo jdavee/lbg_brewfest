@@ -7,6 +7,8 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true
   validates :password, presence: true, if: :password_required?
   validate :lbg_secret_is_correct
+  attribute :password
+  attribute :password_confirmation
 
   def lbg_secret_is_correct
     unless self.lbg_secret.nil?

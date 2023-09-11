@@ -1,6 +1,7 @@
 # Below are the routes for madmin
-namespace :madmin do
-  resources :flights
+authenticated :user, lambda { |u| u.admin? } do
+  namespace :madmin do
+    resources :flights
   resources :announcements
   resources :notifications
   resources :services
@@ -15,4 +16,5 @@ namespace :madmin do
   end
   resources :users
   root to: "dashboard#show"
+  end
 end
