@@ -5,16 +5,12 @@ class User < ApplicationRecord
 
   attr_accessor :lbg_secret
   validates :username, presence: true, uniqueness: true
+  validates :first_name, presence: true
+  validates :last_name, presence: true
   validates :password, presence: true, if: :password_required?
   validate :lbg_secret_is_correct
   attribute :password
   attribute :password_confirmation
-
-  def lbg_secret_is_correct
-    unless self.lbg_secret.nil?
-      errors.add(:lbg_secret, "is incorrect") unless (self.lbg_secret == 'lbgbrewday' || self.lbg_secret.empty?)
-    end
-  end
 
   has_one_attached :avatar
   has_person_name
@@ -24,6 +20,16 @@ class User < ApplicationRecord
   has_many :services
   has_many :breweries
   has_many :beers
+
+  def lbg_secret_is_correct
+    unless self.lbg_secret.nil?
+      errors.add(:lbg_secret, "is incorrect") unless (self.lbg_secret == 'lbgbrewday' || self.lbg_secret.empty?)
+    end
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 
   def password_required?
     !persisted? || !password.nil? || !password_confirmation.nil?

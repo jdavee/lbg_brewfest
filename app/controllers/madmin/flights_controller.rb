@@ -7,7 +7,7 @@ module Madmin
       unless @years.include?(Time.now.year)
         @years << Time.now.year
       end
-      @beers = Beer.all
+      @beers = Beer.where(flight_id: nil)
       @record = resource.model.new
     end
 
@@ -17,7 +17,7 @@ module Madmin
       unless @years.include?(Time.now.year)
         @years << Time.now.year
       end
-      @beers = Beer.all
+      @beers = Beer.where(flight_id: [nil, @record.id])
     end
 
     def create

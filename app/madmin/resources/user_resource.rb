@@ -12,7 +12,7 @@ class UserResource < Madmin::Resource
   attribute :encrypted_password, form: false
   attribute :reset_password_token, form: false
   attribute :reset_password_sent_at, form: false
-  attribute :remember_created_at
+  attribute :remember_created_at, form: false
   attribute :announcements_last_read_at
   attribute :created_at, form: false
   attribute :updated_at, form: false
@@ -23,9 +23,9 @@ class UserResource < Madmin::Resource
   attribute :services
 
   # Uncomment this to customize the display name of records in the admin area.
-  # def self.display_name(record)
-  #   record.name
-  # end
+  def self.display_name(record)
+    record.name
+  end
 
   # Uncomment this to customize the default sort column and direction.
   # def self.default_sort_column

@@ -45,7 +45,7 @@
     <div class="block md:inline-block md:w-32 flex-shrink-0 text-gray-700">
       <label for="beer_ids">Select Beers</label>
     </div>
-    <%= form.collection_select :beer_ids, Beer.all, :id, :name, {include_hidden: false}, { class: 'form-select w-1/4', multiple: true, data: {controller: "select"} } %>
+    <%= form.collection_select :beer_ids, @beers, :id, :name, {include_hidden: false}, { class: 'form-select w-1/4', multiple: true, data: {controller: "select"} } %>
   </div>
 
   <%= form.submit class: "bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" %>

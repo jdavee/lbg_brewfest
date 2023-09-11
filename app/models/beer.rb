@@ -7,5 +7,5 @@ class Beer < ApplicationRecord
     has_one_attached :label
     acts_as_list scope: :flight
 
-    validates_presence_of :name, :beer_style_id, :abv, :keg_type
+    validates_presence_of :name, :beer_style_id, :keg_type
 end

@@ -1,19 +1,18 @@
-class FlightResource < Madmin::Resource
+class BeerStyleResource < Madmin::Resource
   # Attributes
   attribute :id, form: false
-  attribute :year
-  attribute :number
-  attribute :start_time
-  attribute :end_time
+  attribute :category
+  attribute :bjcp_id
+  attribute :style
+  attribute :flight_style
   attribute :created_at, form: false
   attribute :updated_at, form: false
 
   # Associations
-  attribute :beers
 
   # Uncomment this to customize the display name of records in the admin area.
   def self.display_name(record)
-    "Flight #{record.number}"
+    "#{record.bjcp_id} - #{record.style}"
   end
 
   # Uncomment this to customize the default sort column and direction.

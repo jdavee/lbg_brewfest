@@ -2,7 +2,7 @@ class BeerResource < Madmin::Resource
   # Attributes
   attribute :id, form: false
   attribute :name
-  attribute :style
+  attribute :beer_style
   attribute :abv
   attribute :ibu
   attribute :keg_type
@@ -13,11 +13,12 @@ class BeerResource < Madmin::Resource
   # Associations
   attribute :user
   attribute :brewery
+  attribute :flight
 
   # Uncomment this to customize the display name of records in the admin area.
-  # def self.display_name(record)
-  #   record.name
-  # end
+  def self.display_name(record)
+    record.name
+  end
 
   # Uncomment this to customize the default sort column and direction.
   # def self.default_sort_column

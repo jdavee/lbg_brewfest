@@ -1,6 +1,10 @@
 # Below are the routes for madmin
 authenticated :user, lambda { |u| u.admin? } do
   namespace :madmin do
+  resources :checkins
+  resources :beers
+  resources :breweries
+  resources :beer_styles
     resources :flights
   resources :announcements
   resources :notifications
