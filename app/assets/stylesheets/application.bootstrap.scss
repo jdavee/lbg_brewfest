@@ -6,9 +6,10 @@ $primary: #771200;
 @import "tom-select/dist/css/tom-select.bootstrap5";
 @import "flatpickr/dist/flatpickr";
 @import "flatpickr/dist/themes/dark";
+@import "basiclightbox/dist/basicLightbox.min";
 
 .bg-main-page {
-    background-image: url('/assets/beerGradient.jpg');
+    background-image: url('/assets/beerGradientBG.jpg');
     background-size: cover;
 }
 

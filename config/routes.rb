@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   draw :madmin
   get '/privacy', to: 'home#privacy'
   get '/terms', to: 'home#terms'
+  get '/about', to: 'home#about'
+  get '/gallery', to: 'home#gallery'
 authenticate :user, lambda { |u| u.admin? } do
   mount Sidekiq::Web => '/sidekiq'
 

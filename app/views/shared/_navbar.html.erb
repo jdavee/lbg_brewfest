@@ -25,18 +25,13 @@
             <span>Event Details</span>
           <% end %>
           <div id="event-dropdown" class="dropdown-menu dropdown-menu-end" aria-labelledby="navbar-dropdown">
-            <span class="dropdown-item">Coming Soon...</span>
-            <% if false %>
-              <%= link_to "General Info", root_path, class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
-              <%= link_to "Location", root_path, class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
-              <%= link_to "Schedule", root_path, class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
-              <%= link_to "Camping", root_path, class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
-              <%= link_to "Rules", root_path, class: "dropdown-item" %>
-            <% end %>
+            <%= link_to "What To Expect", '/about', class: "dropdown-item" %>
+            <div class="dropdown-divider"></div>
+            <%= link_to "Location", root_path, class: "dropdown-item" %>
+            <div class="dropdown-divider"></div>
+            <%= link_to "Schedule", root_path, class: "dropdown-item" %>
+            <div class="dropdown-divider"></div>
+            <%= link_to "Photo Gallery", '/gallery', class: "dropdown-item" %>
           </div>
         </li>
         <li class="nav-item dropdown">

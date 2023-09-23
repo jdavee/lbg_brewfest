@@ -1,0 +1,20 @@
+<div class="container">
+  <span></span>
+  <div class="row justify-content-center mb-3">
+    <div class="col-8 text-center bg-light rounded p-3 border border-3 border-primary text-primary" >
+      <h1>Previous BrewFest Highlights</h1>
+    </div>
+  </div>
+</div>
+
+<div class="row text-center text-lg-start">
+  <% @images.map do |path| %>
+    <div class="col-lg-3 col-md-4 col-6">
+      <div class="d-block mb-4" data-controller="lightbox" data-lightbox-url-value= <%= image_url("gallery/#{File.basename(path)}") %>>
+        <%= image_tag("gallery/#{File.basename(path)}", class: 'img-fluid img-thumbnail w-100', style: 'object-fit: cover; height: 150px;', data: {action: "click->lightbox#show"}) %>
+      </div>
+    </div>
+  <% end.reduce(&:+) %>
+
+  
+</div>

@@ -4,6 +4,10 @@ class HomeController < ApplicationController
   def index
   end
 
+  def gallery
+    @images = Dir.glob('app/assets/images/gallery/*').map
+  end
+
   def terms
   end
 
