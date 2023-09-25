@@ -2,16 +2,22 @@
   <% if !user_signed_in? %>
     <div class="row justify-content-center">
       <div class="col-8 bg-light rounded p-3 border border-2 border-primary" style="--bs-bg-opacity: .6;">
-        <h1 class="text-primary">Ready to donate some beer?</h1>
-        <%= link_to "Log In", new_user_session_path, class: 'btn btn-danger btn-lg py-3 px-5 border-primary' %>
-        <span class="small text-primary d-block m-1">
-          * You will need the LBG Secret password to gain access to beer management.
-          <a href="mailto:info@lawrencebrewers.org">Contact us</a>
-          or reach out to an LBG officer for the password.  
-        </span>
+        <% unless beer_toggle_enabled? %>
+          <h1 class="text-primary">Ready to donate some beer?</h1>
+          <%= link_to "Log In", new_user_session_path, class: 'btn btn-danger btn-lg py-3 px-5 border-primary' %>
+          <span class="small text-primary d-block m-1">
+            * You will need the LBG Secret password to gain access to beer management.
+            <a href="mailto:info@lawrencebrewers.org">Contact us</a>
+            or reach out to an LBG officer for the password.  
+          </span>
+        <% else %>
+          <h4 class="text-primary">Log In or Sign Up to check in, rate and review beers, and leave comments for the brewers</h4>
+          <%= link_to "Log In", new_user_session_path, class: 'btn btn-danger btn-lg py-3 px-5 border-primary' %>
+          <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-danger btn-lg py-3 px-5 border-primary' %>
+        <% end %>
       </div>
     </div>
-  <% elsif current_user.current_member? && (current_user.breweries.empty? || current_user.beers.empty?)%>
+  <% elsif current_user.current_member? && (current_user.breweries.empty? || current_user.beers.empty?) && beer_toggle_enabled? %>
     <div class="row justify-content-center">
       <div class="col-8 bg-light rounded p-3 border border-2 border-primary" style="--bs-bg-opacity: .6;">
         <h1 class="text-primary">Ready to donate some beer?</h1>

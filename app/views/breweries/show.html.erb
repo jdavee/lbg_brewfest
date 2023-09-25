@@ -14,7 +14,7 @@
 
   <div class="row justify-content-center">
     <div class="col-12 text-center bg-light rounded p-3 border border-3 border-primary text-primary">
-      <% if user_signed_in? %>
+      <% if user_signed_in? && beer_toggle_enabled? %>
         <% if @brewery.user_id == current_user.id %>
           <%= link_to edit_brewery_path(@brewery) do %>
             <span class="float-end" style="font-size: 24px"><i class="fa fa-edit text-danger"></i></span>
@@ -38,7 +38,7 @@
           <div class="bg-white rounded shadow-sm pt-3 w-100">
             <div class="d-flex flex-column justify-content-between h-100">
               <div>
-                <% if user_signed_in? %>
+                <% if user_signed_in? && beer_toggle_enabled? %>
                   <% if beer.user_id == current_user.id %>
                     <div class="d-flex justify-content-between px-3" style="font-size: 24px">
                       <%= link_to edit_beer_path(beer, brewery_id: beer.brewery_id) do %>
@@ -71,7 +71,7 @@
         </div>
       <% end %>
     <% end %>
-    <% if user_signed_in? %>
+    <% if user_signed_in? && beer_toggle_enabled? %>
       <% if @brewery.user_id == current_user.id %>
         <div class="col-12 col-sm-6 col-md-4 col-xl-3 mb-4 d-flex flex-row align-items-stretch" style="min-height: 275px">
           <div class="bg-white opacity-50 rounded shadow-sm pt-3 w-100 border border-2 border-dashed border-danger" style="border-style: dashed !important">

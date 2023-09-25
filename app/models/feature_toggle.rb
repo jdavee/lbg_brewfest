@@ -1,0 +1,2 @@
+class FeatureToggle < ApplicationRecord
+end

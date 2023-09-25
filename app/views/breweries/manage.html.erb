@@ -25,15 +25,18 @@
         <% end %>
       </div>
     <% end %>
-    <div class="col-xl-3 col-sm-6 mb-4">
-      <div class="bg-white opacity-50 rounded shadow-sm pt-3 w-100 border border-2 border-dashed border-danger" style="border-style: dashed !important; height: 250px">
-        <%= link_to new_brewery_path, class: "text-decoration-none" do %>
-          <div class="d-flex flex-column justify-content-center h-100 text-danger">
-            <i class="fa fa-2x fa-plus-circle"></i>
-            Add Brewery
-          </div>
-        <% end %>
+
+    <% if beer_toggle_enabled? %>
+      <div class="col-xl-3 col-sm-6 mb-4">
+        <div class="bg-white opacity-50 rounded shadow-sm pt-3 w-100 border border-2 border-dashed border-danger" style="border-style: dashed !important; height: 250px">
+          <%= link_to new_brewery_path, class: "text-decoration-none" do %>
+            <div class="d-flex flex-column justify-content-center h-100 text-danger">
+              <i class="fa fa-2x fa-plus-circle"></i>
+              Add Brewery
+            </div>
+          <% end %>
+        </div>
       </div>
-    </div>
+    <% end %>
   </div>
 </div>

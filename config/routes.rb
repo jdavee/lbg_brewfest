@@ -17,11 +17,20 @@ Rails.application.routes.draw do
       get :manage
     end
   end
+
+  resources :feature_toggles do
+    collection do
+      get :toggle_beer_submission
+    end
+  end
+
   draw :madmin
   get '/privacy', to: 'home#privacy'
   get '/terms', to: 'home#terms'
   get '/about', to: 'home#about'
   get '/gallery', to: 'home#gallery'
+  get '/music', to: 'home#music'
+  get '/schedule', to: 'home#schedule'
 authenticate :user, lambda { |u| u.admin? } do
   mount Sidekiq::Web => '/sidekiq'
 

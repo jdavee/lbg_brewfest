@@ -309,5 +309,8 @@ if BeerStyle.count == 0
   BeerStyle.create(category: 'NON-ALCOHOLIC', bjcp_id: '', style: 'Sparkling Water')
   BeerStyle.create(category: 'NON-ALCOHOLIC', bjcp_id: '', style: 'Hop Water')
   
+end
 
+if FeatureToggle.count == 0
+  FeatureToggle.create(beer_submission: true)
 end

@@ -1,7 +1,10 @@
 class HomeController < ApplicationController
-  skip_before_action :authenticate_user!, :only => [:index, :terms, :privacy]
+  skip_before_action :authenticate_user!, :only => [:index, :about, :gallery, :music, :terms, :privacy]
 
   def index
+  end
+
+  def about
   end
 
   def gallery

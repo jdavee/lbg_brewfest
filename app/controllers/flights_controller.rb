@@ -1,5 +1,6 @@
 class FlightsController < ApplicationController
   before_action :set_flight, only: %i[ show destroy ]
+  skip_before_action :authenticate_user!, :only => [:index, :show]
 
   # GET /flights or /flights.json
   def index
