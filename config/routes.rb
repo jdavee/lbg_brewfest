@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   get '/gallery', to: 'home#gallery'
   get '/music', to: 'home#music'
   get '/schedule', to: 'home#schedule'
+  get '/location', to: 'home#location'
 authenticate :user, lambda { |u| u.admin? } do
   mount Sidekiq::Web => '/sidekiq'
 

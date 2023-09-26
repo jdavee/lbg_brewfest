@@ -26,9 +26,9 @@
           <% end %>
           <div id="event-dropdown" class="dropdown-menu dropdown-menu-end" aria-labelledby="navbar-dropdown">
             <%= link_to "What To Expect", '/about', class: "dropdown-item" %>
-            <div class="dropdown-divider"></div>
-            <%= link_to "Location", root_path, class: "dropdown-item" %>
             <% if user_signed_in? && current_user.current_member? %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Location", '/location', class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
               <%= link_to "Schedule", '/schedule', class: "dropdown-item" %>
             <% end %>
@@ -52,6 +52,9 @@
         </li>
         <li class="nav-item dropdown">
           <%= link_to "Live Music", '/music', class: "nav-link text-light" %>
+        </li>
+        <li class="nav-item dropdown">
+          <%= link_to "Apparel", 'https://brewersguild23.itemorder.com/shop/home/', target: "_blank", class: "nav-link text-light" %>
         </li>
 
         <li class="nav-item"><%= link_to "Announcements", announcements_path, class: "nav-link text-light #{unread_announcements(current_user)}" %></li>
