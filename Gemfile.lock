@@ -165,6 +165,7 @@ GEM
     jmespath (1.6.2)
     jsbundling-rails (1.1.1)
       railties (>= 6.0.0)
+    json (2.6.3)
     jwt (2.7.1)
     llhttp-ffi (0.4.0)
       ffi-compiler (~> 1.0)
@@ -275,6 +276,10 @@ GEM
     rails-html-sanitizer (1.6.0)
       loofah (~> 2.21)
       nokogiri (~> 1.14)
+    rails_real_favicon (0.1.1)
+      json (>= 1.7, < 3)
+      rails
+      rubyzip (~> 2)
     railties (7.0.5)
       actionpack (= 7.0.5)
       activesupport (= 7.0.5)
@@ -374,6 +379,7 @@ DEPENDENCIES
   puma (~> 5.0)
   pundit (~> 2.1)
   rails (~> 7.0.4, >= 7.0.4.3)
+  rails_real_favicon
   redis (~> 4.0)
   responders!
   selenium-webdriver
