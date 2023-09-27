@@ -41,9 +41,9 @@
             <span>Beer</span>
           <% end %>
           <div id="beer-dropdown" class="dropdown-menu dropdown-menu-end" aria-labelledby="navbar-dropdown">
-            <%= link_to "Participating Breweries", breweries_path, class: "dropdown-item" %>
-            <div class="dropdown-divider"></div>
             <%= link_to "Flight Schedule", flights_path, class: "dropdown-item" %>
+            <div class="dropdown-divider"></div>
+            <%= link_to "Participating Breweries", breweries_path, class: "dropdown-item" %>
             <% if false %>
               <div class="dropdown-divider"></div>
               <%= link_to "Track and Rate Beers", root_path, class: "dropdown-item" %>

@@ -10,6 +10,13 @@
       <h1><%= "Flight #{@flight.number}" %></h1>
     </div>
   </div>
+  <div class="alert alert-danger p-1 mt-1 rounded text-center">
+    <% if user_signed_in? %>
+      <span>Tap on beer to get full details, rate beer, or leave a review.  Use the checkbox on the right to mark as sampled.</span>
+    <% else %>
+      <span>Tap on beer to get full details</span>
+    <% end %>
+  </div>
   
   <div class="row mt-3">
     <div class="col-12 p-0">
@@ -26,13 +33,37 @@
             </div>
             <div class="col-10 col-md-11 text-start">
               <div class="row p-0 align-items-center">
-                <div class="col-3 col-md-2 p-0">
-                    <%= image_tag beer.label.attached? ? beer.label : asset_path('beer_mug_icon.png'), style: "border-radius: 50% !important; max-width: 100px;",  class: "w-100 img-thumbnail shadow-s" %>
-                </div>
-                <div class="col-8 my-auto">
-                  <h6 class="<%= class_names({'text-white': checkin&.sampled?}) %> text-primary my-0"><b><%= beer.name %></b></h6>
-                  <hr class="my-1 w-25 text-warning opacity-75" style="border-width: 2px; border-style: dashed"/>
-                  <span class="<%= class_names({'text-white': checkin&.sampled?}) %>"><%= beer.beer_style.style %></span>
+                <div class="col-11" data-controller="modal">
+                  <%= link_to (checkin.nil? ? new_checkin_path(beer_id: beer.id) : edit_checkin_path(checkin)), class: 'text-decoration-none' do%>
+                    <div class="row">
+                      <div class="col-3 col-md-2 p-0 my-auto">
+                        <% if beer.label.attached? %>
+                          <%= image_tag beer.label,  class: "beer-image my-auto img-thumbnail shadow-s" %>
+                        <% elsif beer.brewery.logo.attached? %>
+                          <%= image_tag beer.brewery.logo, style: "border-radius: 50% !important; max-width: 100px;",  class: "w-100 img-thumbnail shadow-s" %>
+                        <% else %>
+                          <%= image_tag('beer_mug_icon.png', style: "border-radius: 50% !important; max-width: 100px;",  class: "w-100 img-thumbnail shadow-s") %>
+                        <% end %>
+                      </div>
+                      <div class="col-8 my-auto">
+                        <h6 class="<%= class_names({'text-white': checkin&.sampled?}) %> text-primary my-0"><b><%= beer.name %></b></h6>
+                        <% if !checkin.nil? && checkin.rating !=0 %>
+                          <div class="row my-1 ">
+                            <div class="col-12">
+                              <div class="d-flex flex-row justify-content-start">
+                                <% Checkin::MAX_RATING.times do |n| %>
+                                  <i class="fa-star <%= star_rating_class(checkin, n) %>" style="color: grey; font-size: 11px;"></i>
+                                <% end %>
+                              </div>
+                            </div>
+                          </div>
+                        <% else %>
+                          <hr class="my-1 w-25 text-warning opacity-75" style="border-width: 2px; border-style: dashed"/>
+                        <% end %>
+                        <span class="<%= class_names({'text-white': checkin&.sampled?}) %>"><%= beer.beer_style.style %></span>
+                      </div>
+                    </div>
+                  <% end %>
                 </div>
                 <% if user_signed_in? %>
                   <div class="col-1 form-check d-flex flex-column justify-content-center py-0 ps-0" data-controller="remote">
@@ -42,10 +73,6 @@
                     <% end %>
                   </div>
                 <% end %>
-              </div>
-              <div class="row">
-                <div class="col-12">
-                </div>
               </div>
             </div>
           </div>

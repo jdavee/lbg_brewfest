@@ -60,3 +60,30 @@ $primary: #771200;
     margin-left: auto;
     margin-right: auto;
 }
+
+@media only screen and (max-width: 600px) {
+    .beer-image {
+        width: 70px;
+        height: 70px;
+        border-radius: 50% !important;
+        object-fit: cover;
+    }
+}
+
+@media only screen and (max-width: 991px) and (min-width: 601px) {
+    .beer-image {
+        width: 100px;
+        height: 100px;
+        border-radius: 50% !important;
+        object-fit: cover;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .beer-image {
+        width: 125px;
+        height: 125px;
+        border-radius: 50% !important;
+        object-fit: cover;
+    }
+}

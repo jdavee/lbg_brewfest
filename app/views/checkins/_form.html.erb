@@ -11,19 +11,54 @@
     </div>
   <% end %>
 
-  <div class="mb-3">
-    <% if checkin.persisted? %>
-      <div class="float-end">
-        <%= link_to 'Destroy', checkin, method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
+  <div class="card text-center mb-5">
+    <%= link_to brewery_path(@beer.brewery), class: 'text-decoration-none' do %>
+      <div class="card-header justify-content-center bg-primary text-light py-3">
+        <%= image_tag @beer.brewery.logo.attached? ? @beer.brewery.logo : asset_path('brewingIcon.png'), style: "width: 60px; height: 60px;", class: "img-thumbnail shadow-s d-inline"%>
+        <h2 class="ms-2 d-inline"><%= @beer.brewery.name %></h2>
       </div>
     <% end %>
-
-    <%= form.submit class: 'btn btn-primary' %>
-
-    <% if checkin.persisted? %>
-      <%= link_to "Cancel", checkin, class: "btn btn-link" %>
-    <% else %>
-      <%= link_to "Cancel", checkins_path, class: "btn btn-link" %>
-    <% end %>
+    <div class="card-body">
+      <div data-controller="lightbox" data-lightbox-url-value= <%= @beer.label.attached? ? @beer.label.url : image_url("beer_mug_icon.png") %>>
+        <%= image_tag @beer.label.attached? ? @beer.label : asset_path('beer_mug_icon.png'), style: "width: 175px; height: 175px; border-radius: 50% !important ",  class: "mb-3 img-thumbnail shadow-s mx-auto", data: {action: "click->lightbox#show"} %>
+      </div>
+      <h5 class="mb-0"><%= @beer.name %></h5>
+      <% unless @beer.beer_style_id.nil?%>
+        <span class="small text-uppercase text-muted"><%= @beer&.beer_style&.bjcp_id %> - <%= @beer&.beer_style&.style %></span>
+      <% end %>
+      <div class="mt-auto">
+        <div class="border-top border-3 border-primary mt-2"></div>
+        <div class="bg-primary p-2 text-light border-top border-bottom" style="min-height: 25px;">
+          <%= @beer.description %>
+        </div>
+        <div class="p-2 text-primary d-flex justify-content-between border-top border-3 border-primary">
+          <span class="ms-2"><b><%= @beer.ibu %> IBU</b></span>
+          <span class="me-2"><b><%= @beer.abv%>% ABV</b></span>
+        </div>
+      </div>
+      <hr class="text-primary border-3 opacity-100"/>
+      <% if user_signed_in? %>
+        <div class="d-flex flex-row justify-content-center mb-4">
+          <% Checkin::MAX_RATING.times do |n| %>
+            <%= link_to submit_rating_checkins_path(beer_id: @beer.id, user_id: current_user.id, rating: n + 1), class: "text-decoration-none", method: :patch do %>
+              <i class="fa-star <%= star_rating_class(@checkin, n) %>" style="font-size: 28px; color: grey;"></i>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="mb-3">
+          <%= form.hidden_field :user_id, value: current_user.id %>
+          <%= form.hidden_field :beer_id, value: @beer.id %>
+          <%= form.text_area :review, autofocus: false, class: 'form-control', placeholder: "Leave Comments/Review for Brewer" %>
+        </div>
+      <% else %>
+        <%= link_to "Sign Up To Rate/Review This Beer", new_user_registration_path, class: 'btn btn-outline-primary' %>
+      <% end %>
+    </div>
+    <div class="card-footer text-center d-flex justify-content-center">
+      <% if user_signed_in? %>
+        <%= form.submit "Submit Rating/Review", class: 'btn btn-primary me-1' %>
+      <% end %>
+      <%= link_to "Back", flight_path(@beer.flight_id), class: 'btn btn-secondary ms-1' %>
+    </div>
   </div>
 <% end %>

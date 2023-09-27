@@ -1,12 +1,36 @@
-<div class="page-header">
-  <%= link_to checkins_path, class: 'btn btn-default' do %>
-    All Checkins
-  <% end %>
-  <%= link_to edit_checkin_path(@checkin), class: 'btn btn-primary' do %>
-    Edit
-  <% end %>
-  <h1>Show checkin</h1>
+<div class="card text-center">
+  <div class="card-header justify-content-center bg-primary text-light py-3">
+    <%= image_tag @checkin.beer.brewery.logo.attached? ? @checkin.beer.brewery.logo : asset_path('brewingIcon.png'), style: "width: 60px; height: 60px;", class: "img-thumbnail shadow-s d-inline"%>
+    <h2 class="ms-2 d-inline"><%= @checkin.beer.brewery.name %></h2>
+  </div>
+  <div class="card-body">
+    <%= image_tag @checkin.beer.label.attached? ? @checkin.beer.label : asset_path('beer_mug_icon.png'), style: "width: 175px; height: 175px; border-radius: 50% !important ",  class: "mb-3 img-thumbnail shadow-s mx-auto" %>
+      <h5 class="mb-0"><%= @checkin.beer.name %></h5>
+      <% unless @checkin.beer.beer_style_id.nil?%>
+        <span class="small text-uppercase text-muted"><%= @checkin.beer&.beer_style&.bjcp_id %> - <%= @checkin.beer&.beer_style&.style %></span>
+      <% end %>
+      <div class="mt-auto">
+        <div class="border-top border-3 border-primary mt-2"></div>
+        <div class="bg-primary p-2 text-light border-top border-bottom" style="min-height: 25px;">
+          <%= @checkin.beer.description %>
+        </div>
+        <div class="p-2 text-primary d-flex justify-content-between border-top border-3 border-primary">
+          <span class="ms-2"><b><%= @checkin.beer.ibu %> IBU</b></span>
+          <span class="me-2"><b><%= @checkin.beer.abv%>% ABV</b></span>
+        </div>
+      </div>
+      <hr class="text-primary border-3 opacity-100"/>
+      
+      <div class="d-flex flex-row justify-content-center mb-4">
+        <% Checkin::MAX_RATING.times do |n| %>
+          <%= link_to submit_rating_checkin_path(beer_id: @checkin.beer.id, user_id: current_user.id, rating: n + 1), class: "text-decoration-none", method: :patch do %>
+            <i class="fa-star <%= star_rating_class(@checkin, n) %>" style="font-size: 28px; color: grey;"></i>
+          <% end %>
+        <% end %>
+      </div>
+  </div>
+  <div class="card-footer text-center d-flex justify-content-center">
+    <button type="button" class="btn btn-primary">Submit Rating/Review</button>
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+  </div>
 </div>
-
-<dl class="dl-horizontal">
-</dl>

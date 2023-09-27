@@ -6,6 +6,9 @@ Rails.application.routes.draw do
     member do
       post :toggle_sampled
     end
+    collection do
+      patch :submit_rating
+    end
   end
   resources :beers do
     member do

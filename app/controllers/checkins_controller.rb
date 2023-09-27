@@ -1,5 +1,6 @@
 class CheckinsController < ApplicationController
   before_action :set_checkin, only: %i[ show edit update destroy ]
+  skip_before_action :authenticate_user!, :only => [:new]
 
   # GET /checkins or /checkins.json
   def index
@@ -13,19 +14,22 @@ class CheckinsController < ApplicationController
   # GET /checkins/new
   def new
     @checkin = Checkin.new
+    @beer = Beer.find(params[:beer_id])
   end
 
   # GET /checkins/1/edit
   def edit
+    @beer = @checkin.beer
   end
 
   # POST /checkins or /checkins.json
   def create
     @checkin = Checkin.new(checkin_params)
+    @beer = @checkin.beer
 
     respond_to do |format|
       if @checkin.save
-        format.html { redirect_to checkin_url(@checkin), notice: "Checkin was successfully created." }
+        format.html { redirect_to flight_url(@checkin.beer.flight_id), notice: "Rating/Review Submitted Successfully" }
         format.json { render :show, status: :created, location: @checkin }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -36,9 +40,10 @@ class CheckinsController < ApplicationController
 
   # PATCH/PUT /checkins/1 or /checkins/1.json
   def update
+    @beer = @checkin.beer
     respond_to do |format|
       if @checkin.update(checkin_params)
-        format.html { redirect_to checkin_url(@checkin), notice: "Checkin was successfully updated." }
+        format.html { redirect_to flight_url(@checkin.beer.flight_id), notice: "Rating/Review Updated Successfully" }
         format.json { render :show, status: :ok, location: @checkin }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -53,6 +58,14 @@ class CheckinsController < ApplicationController
     @checkin.save
     
     redirect_back(fallback_location: flights_path)
+  end
+
+  def submit_rating
+    @checkin = Checkin.find_or_create_by(beer_id: params[:beer_id], user_id: params[:user_id])
+    @beer = @checkin.beer
+    @checkin.update(rating: params[:rating])
+    
+    redirect_to edit_checkin_url(@checkin)
   end
 
   # DELETE /checkins/1 or /checkins/1.json
@@ -73,6 +86,6 @@ class CheckinsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def checkin_params
-      params.fetch(:checkin, {})
+      params.require(:checkin).permit(:user_id, :beer_id, :sampled, :rating, :review)
     end
 end
