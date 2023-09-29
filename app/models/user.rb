@@ -5,8 +5,6 @@ class User < ApplicationRecord
 
   attr_accessor :lbg_secret
   validates :username, presence: true, uniqueness: true
-  validates :first_name, presence: true
-  validates :last_name, presence: true
   validates :password, presence: true, if: :password_required?
   validate :lbg_secret_is_correct
   attribute :password
