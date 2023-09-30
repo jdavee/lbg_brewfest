@@ -40,9 +40,9 @@
                         <% if beer.label.attached? %>
                           <%= image_tag beer.label,  class: "beer-image my-auto img-thumbnail shadow-s" %>
                         <% elsif beer.brewery.logo.attached? %>
-                          <%= image_tag beer.brewery.logo, style: "border-radius: 50% !important; max-width: 100px;",  class: "w-100 img-thumbnail shadow-s" %>
+                          <%= image_tag beer.brewery.logo, class: "beer-image my-auto img-thumbnail shadow-s" %>
                         <% else %>
-                          <%= image_tag('beer_mug_icon.png', style: "border-radius: 50% !important; max-width: 100px;",  class: "w-100 img-thumbnail shadow-s") %>
+                          <%= image_tag('beer_mug_icon.png', class: "beer-image img-thumbnail shadow-s") %>
                         <% end %>
                       </div>
                       <div class="col-8 my-auto">
