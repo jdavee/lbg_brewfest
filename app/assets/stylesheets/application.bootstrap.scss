@@ -9,8 +9,22 @@ $primary: #771200;
 @import "basiclightbox/dist/basicLightbox.min";
 
 .bg-main-page {
-    background-image: url('/assets/beerGradientBG.jpg');
-    background-size: cover;
+    background-image: url('/assets/beer-gradient-bg.jpg');
+    background-size: contain;
+    background-repeat: repeat-y;
+}
+
+.navbar {
+    @include media-breakpoint-up(xs) {
+        background-image: url('/assets/navbar-bg.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        padding-bottom: 65px;
+    }
+
+    @include media-breakpoint-up(sm) {
+        padding-bottom: 100px;
+    }
 }
 
 .card-button {
@@ -44,14 +58,14 @@ $primary: #771200;
 
 .custom-navbar-collapse {
     @include media-breakpoint-up(xs) { 
-        background: $primary;
+        background-image: url('/assets/navbar-collapse-bg.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
     }
     @include media-breakpoint-up(sm) { 
-        background: #560101cc;
+        opacity: .9;
     }
-    @include media-breakpoint-up(xl) { 
-        background: unset;
-    }
+   
 }
 
 .field_with_errors { display: inline; }
