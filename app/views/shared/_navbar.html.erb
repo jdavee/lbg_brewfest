@@ -1,3 +1,5 @@
+<% user_agent = request.env['HTTP_USER_AGENT'] %>
+<% device = DeviceDetector.new(user_agent) %>
 <% if current_user != true_user %>
   <div class="alert alert-warning text-center">
     You're logged in as <b><%= current_user.name %> (<%= current_user.email %>)</b>
@@ -6,16 +8,54 @@
 <% end %>
 
 <nav class="navbar navbar-expand-md navbar-dark">
-  <div class="container mx-auto">
+  <div class="container justify-content-between">
     <%= link_to root_path, class: "navbar-brand" do %>
       <%= image_tag asset_path('BrewFest_Logo.png'), height: 120 %>
     <% end %>
+    <div class="">
+      <% unless device.device_type == 'desktop' %>
+        <% if user_signed_in? %>
+          <div class="navbar-header d-inline-flex d-md-none">
+            <ul class="nav">
+              <li class="nav-item dropdown">
+                <%= link_to "#", class: "nav-link text-light", data: { bs_display: "static", target: "notifications-dropdown", bs_toggle: "dropdown"}, aria: {haspopup: true, expanded: false} do %>
+                  <div class="position-relative">
+                    <span><i class="far fa-bell fa-2x"></i></span>
+                      <%= turbo_stream_from current_user, :notifications_count %>
+                      <%= turbo_frame_tag "notifications-count" do %>
+                        <% unless current_user.notifications.unread.count == 0 %>
+                          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            <span><%= current_user.notifications.unread.count %></span>
+                          </span>
+                        <% end %>
+                      <% end %>
+                  </div>
+                <% end %>
+                <div id="notifications-dropdown" class="dropdown-menu pb-0" style="width: max-content; min-width: 300px; transform: translate(-200px, -5px);" aria-labelledby="navbar-dropdown">
+                  <div>
+                    <%= turbo_stream_from current_user, :notifications %>
+                    <%= turbo_frame_tag "notifications", src: notifications_path %>
+                  </div>
+                  <% unless current_user.notifications.count == 0 %>
+                    <%= link_to all_notifications_path, class: 'text-light text-decoration-none' do %>
+                      <div class="w-100 bg-danger text-center rounded-bottom py-2">
+                        <strong>View All</strong>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              </li>
+            </ul>
+          </div>
+        <% end %>
+      <% end %>
 
-    <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+      <button class="navbar-toggler custom-toggler d-inline-flex d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
 
-    <div class="collapse navbar-collapse custom-navbar-collapse p-3 rounded" id="navbarMain">
+    <div class="collapse navbar-collapse custom-navbar-collapse p-3 rounded order-3 order-md-1" id="navbarMain">
       <ul class="navbar-nav me-auto mt-2 mt-md-0">
       </ul>
 
@@ -50,11 +90,8 @@
             <% end %>
           </div>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item">
           <%= link_to "Live Music", '/music', class: "nav-link text-light" %>
-        </li>
-        <li class="nav-item dropdown">
-          <%= link_to "Apparel", 'https://brewersguild23.itemorder.com/shop/home/', target: "_blank", class: "nav-link text-light" %>
         </li>
 
         <li class="nav-item"><%= link_to "Announcements", announcements_path, class: "nav-link text-light #{unread_announcements(current_user)}" %></li>
@@ -65,12 +102,36 @@
               <%= link_to "Beer Management", manage_breweries_path, class: "btn btn-outline-light" %>
             </li>
           <% end %>
-
-          <li class="nav-item">
-            <%= link_to notifications_path, class: "nav-link text-light" do %>
-              <span><i class="far fa-bell" aria-hidden="true"></i></span>
-            <% end %>
-          </li>
+          <% if device.device_type == 'desktop' %>
+            <li class="nav-item dropdown d-none d-md-block">
+              <%= link_to "#", class: "nav-link text-light", data: { target: "notifications-md-dropdown", bs_toggle: "dropdown"}, aria: {haspopup: true, expanded: false} do %>
+                <div class="position-relative">
+                  <span><i class="far fa-bell fa-2x"></i></span>
+                    <%= turbo_stream_from current_user, :notifications_count %>
+                    <%= turbo_frame_tag "notifications-count" do %>
+                      <% unless current_user.notifications.unread.count == 0 %>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                          <span><%= current_user.notifications.unread.count %></span>
+                        </span>
+                      <% end %>
+                    <% end %>
+                </div>
+              <% end %>
+              <div id="notifications-md-dropdown" class="dropdown-menu dropdown-menu-end pb-0" style="width: max-content; min-width: 300px;" aria-labelledby="navbar-dropdown">
+                <div>
+                  <%= turbo_stream_from current_user, :notifications %>
+                  <%= turbo_frame_tag "notifications", src: notifications_path %>
+                </div>
+                <% unless current_user.notifications.count == 0 %>
+                  <%= link_to all_notifications_path, class: 'text-light text-decoration-none' do %>
+                    <div class="w-100 bg-danger text-center rounded-bottom py-2">
+                      <strong>View All</strong>
+                    </div>
+                  <% end %>
+                <% end %>
+              </div>
+            </li>
+          <% end %>
 
           <li class="nav-item dropdown">
             <%= link_to "#", id: "navbar-dropdown", class: "nav-link text-light dropdown-toggle", data: { target: "nav-account-dropdown", bs_toggle: "dropdown" }, aria: { haspopup: true, expanded: false } do %>

@@ -48,7 +48,11 @@ authenticate :user, lambda { |u| u.admin? } do
   end
 end
 
-  resources :notifications, only: [:index]
+  resources :notifications do
+    collection do
+      get :all
+    end
+  end
   resources :announcements, only: [:index]
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks", registrations: "users/registrations" }
   root to: 'home#index'

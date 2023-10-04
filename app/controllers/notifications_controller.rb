@@ -1,8 +1,18 @@
 class NotificationsController < ApplicationController
   before_action :authenticate_user!
+  before_action :mark_as_read, only: %i[ all ], if: :user_signed_in?
 
   def index
-    # Convert the database records to Noticed notification instances so we can use helper methods
-    @notifications = current_user.notifications.map(&:to_notification)
+    @notifications = Notification.where(recipient: current_user).newest_first.limit(6)
   end
+
+  def all
+    @notifications = Notification.where(recipient: current_user).newest_first
+  end
+
+  private
+
+    def mark_as_read
+      current_user.notifications.mark_as_read!
+    end
 end

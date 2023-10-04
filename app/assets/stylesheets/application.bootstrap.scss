@@ -15,6 +15,7 @@ $primary: #771200;
 }
 
 .navbar {
+    z-index: 9999 !important;
     @include media-breakpoint-up(xs) {
         background-image: url('/assets/navbar-bg.png');
         background-size: cover;

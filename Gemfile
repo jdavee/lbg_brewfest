@@ -91,5 +91,6 @@ gem "sitemap_generator", "~> 6.1"
 gem "whenever", require: false
 gem "responders", github: "heartcombo/responders", branch: "main"
 gem "acts_as_list"
+gem 'device_detector'
 
 gem "dockerfile-rails", ">= 1.5", :group => :development
