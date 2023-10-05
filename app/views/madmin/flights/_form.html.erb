@@ -38,7 +38,7 @@
       <label for="end_time">End Time</label>
       <span class="text-red-500">*</span>
     </div>
-    <%= form.text_field :end_time, value: form.object.new_record? ? '12:00' : form.object.end_time.strftime('%H:%M'), class: "end_time hidden", data: {controller: "flatpickr", flatpickr_enable_time: true, flatpickr_no_calendar: true, flatpickr_date_format: "H:i", flatpickr_inline: true } %>
+    <%= form.text_field :end_time, value: form.object.new_record? ? '12:00' : form.object.end_time.strftime('%H:%M'), class: "end_time hidden", data: {controller: "flatpickr", flatpickr_enable_time: true, flatpickr_no_calendar: true, flatpickr_date_format: "H:i", flatpickr_minute_increment: 1, flatpickr_inline: true } %>
   </div>
 
   <div class="mb-4 md:flex" >
