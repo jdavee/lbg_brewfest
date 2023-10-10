@@ -18,9 +18,9 @@ class Checkin < ApplicationRecord
   def self.to_csv
   checkins = all
   CSV.generate do |csv|
-    csv << ["Checkin Id", "User", "Beer", "Sampled", "Rating", "Review", "Created At"]
+    csv << ["Checkin Id", "User", "Beer", "Brewery", "Brewer", "Sampled", "Rating", "Review", "Created At"]
     checkins.each do |checkin|
-      csv << [checkin.id, (checkin.user.name || checkin.user.username), checkin.beer.name, checkin.sampled, checkin
+      csv << [checkin.id, (checkin.user.name || checkin.user.username), checkin.beer&.name, checkin.beer&.brewery&.name, checkin.beer.brewery.member_name, checkin.sampled, checkin
         .rating, checkin.review, checkin.created_at] 
     end
   end
