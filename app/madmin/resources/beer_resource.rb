@@ -1,6 +1,7 @@
 class BeerResource < Madmin::Resource
   # Attributes
   attribute :id, form: false
+  attribute :year
   attribute :name
   attribute :beer_style
   attribute :abv
