@@ -1,18 +1,26 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  resources :flights
+  resources :flights do
+    collection do
+      get :archive_prev_year
+    end
+  end
   resources :checkins do
     member do
       post :toggle_sampled
     end
     collection do
       patch :submit_rating
+      get :archive_prev_year
     end
   end
   resources :beers do
     member do
       patch :move
+    end
+    collection do
+      get :archive_prev_year
     end
   end
   resources :breweries do 

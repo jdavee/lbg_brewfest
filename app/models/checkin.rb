@@ -7,6 +7,8 @@ class Checkin < ApplicationRecord
   validates :rating, numericality: { in: 0..MAX_RATING }
   after_commit :notify_recipient, on: [:update, :create]
 
+  scope :current, -> { where(archived:false) }
+
   private
 
   def notify_recipient

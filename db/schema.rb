@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_05_231025) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_06_030740) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -76,6 +76,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_05_231025) do
     t.integer "flight_id"
     t.integer "beer_style_id"
     t.integer "position"
+    t.boolean "archived", default: false
   end
 
   create_table "breweries", force: :cascade do |t|
@@ -95,6 +96,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_05_231025) do
     t.text "review"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "archived", default: false
   end
 
   create_table "feature_toggles", force: :cascade do |t|
@@ -110,6 +112,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_05_231025) do
     t.time "end_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "archived", default: false
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|

@@ -11,7 +11,8 @@
         </svg>
       <% end %>
     </form>
-
+    
+    <%= link_to "Archive Prev. Year", main_app.archive_prev_year_flights_path, class: "bg-red-400 hover:bg-red-200 text-gray-800 font-semibold py-2 px-4 border border-red-600 rounded shadow", data: {turbo_method: :get, turbo_confirm: "This will remove/archive all flights created in #{Time.now.year - 1}.  Are you sure you wish to proceed?"} %>
     <%= link_to resource.new_path, class: "bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" do %>
       New <span class="hidden md:inline"><%= resource.friendly_name %></span>
     <% end %>
@@ -42,7 +43,7 @@
     </thead>
 
     <tbody class="text-sm divide-y">
-      <% @records.each do |record| %>
+      <% @records.current.each do |record| %>
         <tr>
           <% resource.attributes.values.each do |attribute| %>
             <% next if attribute.field.nil? %>

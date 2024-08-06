@@ -21,6 +21,12 @@ class FlightsController < ApplicationController
     end
   end
 
+  def archive_prev_year
+    flights = Flight.where(year: Time.now.last_year.year)
+    flights.update(archived: true)
+    redirect_back(fallback_location: madmin_root_path)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_flight

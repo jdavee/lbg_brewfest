@@ -37,6 +37,19 @@
       </div>
     </div>
     <div class="hidden md:block">
+      <hr class="mt-5"/>
+      <% unless FeatureToggle.order(:created_at).last.beer_submission == true %>
+        <%= nav_link_to main_app.toggle_beer_submission_feature_toggles_path, class: "block p-2 rounded hover:bg-gray-100 font-bold text-red" do %>
+          <i class="fa fa-circle-o"></i>
+          <span>Enable Beer Submission</span>
+        <% end %>
+      <% else %>
+        <%= nav_link_to main_app.toggle_beer_submission_feature_toggles_path, class: 'block p-2 rounded hover:bg-gray-100 font-bold text-red', data: { confirm: 'This will prevent any users from submitting beer donations. Are you sure you wish to proceed?' } do %>
+          <i class="fa fa-circle"></i>
+          <span>Disable Beer Submission</span>
+        <% end %>
+      <% end %>
+      <hr class="mb-5"/>
       <%= render "menu_resources" %>
     </div>
   </div>
