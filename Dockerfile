@@ -1,7 +1,7 @@
 # syntax = docker/dockerfile:1
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
-ARG RUBY_VERSION=3.2.2
+ARG RUBY_VERSION=3.3.4
 FROM ruby:$RUBY_VERSION-slim as base
 
 LABEL fly_launch_runtime="rails"
@@ -42,7 +42,7 @@ RUN bundle install && \
     rm -rf ~/.bundle/ $BUNDLE_PATH/ruby/*/cache $BUNDLE_PATH/ruby/*/bundler/gems/*/.git
 
 # Install node modules
-COPY --link package.json yarn.lock ./
+COPY --link package.json package-lock.json yarn.lock ./
 RUN yarn install --frozen-lockfile
 
 # Copy application code
@@ -70,10 +70,6 @@ COPY --from=build /rails /rails
 # Run and own only the runtime files as a non-root user for security
 RUN useradd rails --create-home --shell /bin/bash && \
     chown -R rails:rails db log storage tmp
-
-# Deployment options
-ENV RAILS_LOG_TO_STDOUT="1" \
-    RAILS_SERVE_STATIC_FILES="true"
 
 # Entrypoint sets up the container.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
