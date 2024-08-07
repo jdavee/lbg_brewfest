@@ -2,12 +2,12 @@
   <span></span>
   <div class="row justify-content-center mb-3">
     <div class="col-8 text-center bg-light rounded p-3 border border-3 border-primary text-primary" >
-      <h1>2023 Flights</h1>
+      <h1><%= Time.zone.now.year %> Flights</h1>
     </div>
   </div>
 </div>
 
-<% @flights.order(:number).each do |flight| %>
+<% @flights.current.order(:number).each do |flight| %>
   <%= link_to flight_path(flight) do %>
     <div class="card card-body bg-dark text-light mb-3 border border-primary border-4 rounded">
       <div class="row">

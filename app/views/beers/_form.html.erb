@@ -34,6 +34,7 @@
       <% end %>
 
       <%= form.hidden_field :user_id, value: current_user.id %>
+      <%= form.hidden_field :year, value: Time.zone.now.year %>
 
       <div class="mb-3">
         <%= form.text_field :name, autofocus: false, class: 'form-control', placeholder: "Beer Name" %>

@@ -30,12 +30,12 @@
 
 <div class="container mt-4">
   <div class="row text-center justify-content-center">
-    <% if (!user_signed_in? || @brewery.user_id != current_user.id) && @brewery.beers.empty?%>
+    <% if (!user_signed_in? || @brewery.user_id != current_user.id) && @brewery.beers.current.empty?%>
       <div class="mt-3 w-75 alert alert-warning alert-sm p-1">
         <h4 class="my-auto">There are no beers to display for this brewery.  Check back later.</h4>
       </h4>
     <% else %>
-      <% @brewery.beers.each do |beer| %>
+      <% @brewery.beers.current.each do |beer| %>
         <div class="col-12 col-sm-6 col-md-4 col-xl-3 mb-4 d-flex flex-row align-items-stretch">
           <div class="bg-white rounded shadow-sm pt-3 w-100">
             <div class="d-flex flex-column justify-content-between h-100">

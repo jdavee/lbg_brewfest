@@ -19,7 +19,7 @@
             <h5 class="mb-0"><%= brewery.name %></h5>
             <span class="small text-uppercase text-muted"><%= brewery.member_name %></span>
             <div class="card-button mt-3">
-              <h5><%= brewery.beers.count %> Beers</h5>
+              <h5><%= brewery.beers.current.count %> Beers</h5>
             </div>
           </div>
         <% end %>

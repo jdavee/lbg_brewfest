@@ -3,7 +3,7 @@
     <span></span>
     <div class="row justify-content-center mb-3">
       <div class="col-8 text-center bg-light rounded p-3 border border-3 border-primary text-primary" >
-        <h1>2023 Breweries</h1>
+        <h1><%= Time.zone.now.year %> Breweries</h1>
       </div>
     </div>
 </div>
@@ -11,21 +11,23 @@
 <div class="container">
   <div class="row text-center justify-content-center">
     <% @breweries.each do |brewery| %>
-      <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-        <%= link_to brewery, class: 'text-decoration-none' do%>
-          <div class="bg-white rounded shadow-sm pt-3">
-            <% if false %>
-              <span class="d-block text-end px-3" style="font-size: 24px"><i class="fa fa-edit text-danger"></i></span>
-            <% end %>
-            <%= image_tag brewery.logo.attached? ? brewery.logo : asset_path('brewingIcon.png'), style: "width: 125px; height: 125px; border-radius: 50% !important;", class: "mb-3 img-thumbnail shadow-s" %>
-            <h5 class="mb-0"><%= brewery.name %></h5>
-            <span class="small text-uppercase text-muted"><%= brewery.member_name %></span>
-            <div class="card-button mt-3">
-              <h5><%= brewery.beers.count %> Beers</h5>
+      <% if brewery.beers.current.count >= 1 %>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+          <%= link_to brewery, class: 'text-decoration-none' do%>
+            <div class="bg-white rounded shadow-sm pt-3">
+              <% if false %>
+                <span class="d-block text-end px-3" style="font-size: 24px"><i class="fa fa-edit text-danger"></i></span>
+              <% end %>
+              <%= image_tag brewery.logo.attached? ? brewery.logo : asset_path('brewingIcon.png'), style: "width: 125px; height: 125px; border-radius: 50% !important;", class: "mb-3 img-thumbnail shadow-s" %>
+              <h5 class="mb-0"><%= brewery.name %></h5>
+              <span class="small text-uppercase text-muted"><%= brewery.member_name %></span>
+              <div class="card-button mt-3">
+                <h5><%= brewery.beers.current.count %> Beers</h5>
+              </div>
             </div>
-          </div>
-        <% end %>
-      </div>
+          <% end %>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>

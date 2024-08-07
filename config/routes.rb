@@ -59,6 +59,7 @@ end
   resources :notifications do
     collection do
       get :all
+      delete :destroy_all
     end
   end
   resources :announcements, only: [:index]

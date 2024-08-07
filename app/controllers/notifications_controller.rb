@@ -10,6 +10,11 @@ class NotificationsController < ApplicationController
     @notifications = Notification.where(recipient: current_user).newest_first
   end
 
+  def destroy_all
+    Notification.destroy_all
+    redirect_back(fallback_location: madmin_root_path)
+  end
+
   private
 
     def mark_as_read
