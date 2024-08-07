@@ -1,4 +1,6 @@
 class CheckinResource < Madmin::Resource
+  scope :current
+  
   # Attributes
   attribute :id, form: false
   attribute :sampled

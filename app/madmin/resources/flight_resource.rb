@@ -1,4 +1,6 @@
 class FlightResource < Madmin::Resource
+  scope :current
+  
   # Attributes
   attribute :id, form: false
   attribute :year
