@@ -78,7 +78,7 @@ class BeersController < ApplicationController
   end
 
   def archive_prev_year
-    beers = Beer.where(year: Time.now.last_year.year)
+    beers = Beer.where("created_at <= ?", Time.now.beginning_of_year)
     beers.update(archived: true)
     redirect_back(fallback_location: madmin_root_path)
   end
