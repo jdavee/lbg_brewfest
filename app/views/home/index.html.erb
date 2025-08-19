@@ -31,23 +31,34 @@
   <% end %>
 </div>
 
+<div class="alert alert-warning text-center">
+  <h4 class="text-primary">BrewFest 2025 is an invite-only event signature event put on by the Lawrence Brewers Guild</h4>
+</div>
+
 <div class="container">
   <div class="row justify-content-center mb-4">
     <div class="col-xs-10 col-md-8 col-lg-6">
-      <%= image_tag asset_path('BrewFest_Flyer_2024.jpg'), class: "w-100 rounded" %>
+      <%= image_tag asset_path('BrewFest_Flyer_2025.jpg'), class: "w-100 rounded" %>
     </div>
   </div>
 
-  <% if false %>
-    <% if user_signed_in? && current_user.current_member? %>
-      <div class="row mt-3 mb-5 text-center">
-          <div class="col-12">
-            <div class="d-grid gap-2">
-              <%= link_to "BUY TICKETS", "https://www.lawrencebrewers.org/lbgforum/viewtopic.php?f=21&t=4820", target: "_blank", class: 'btn btn-primary btn-lg border-4 border-danger py-5', style: 'font-size: 32px; font-weight: 800; border-style: double'%>
-            </div>
-            <span class="text-primary"><b>* Must be a current/paid Lawrence Brewers Guild member to purchase</b></span>
-          </div>
+
+  <% if user_signed_in? && current_user.current_member? %>
+    <div class="row mt-3 mb-5 text-center">
+      <div class="col-12">
+        <div class="d-grid gap-2">
+          <%= link_to "BUY TICKETS", "https://www.lawrencebrewers.org/lbgforum/viewtopic.php?t=4902", target: "_blank", class: 'btn btn-primary btn-lg border-4 border-danger py-5', style: 'font-size: 32px; font-weight: 800; border-style: double'%>
         </div>
-      <% end %>
-    <% end %>
+        <span class="text-primary"><b>* Must be a current/paid Lawrence Brewers Guild member to purchase</b></span>
+      </div>
+    </div>
+  <% else %>
+    <div class="row mt-3 mb-5 text-center">
+      <div class="col-12 alert alert-warning border border-2">
+        <h2 class="text-primary">To buy tickets, talk to any Lawrence Brewers Guild member or email the president</h2>
+        <p class="text-primary pt-2"><a class="btn btn-primary btn-lg" href="mailto:president@lawrencebrewers.org">president@lawrencebrewers.org</a></p>
+      </div>
+    </div>
+  <% end %>
+
 </div>

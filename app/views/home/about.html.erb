@@ -10,84 +10,109 @@
 <div class="container">
   <div class="row text-center">
     <div class="col-12">
-      <%= image_tag('BrewFest2018', class: 'img-fluid w-75 img-thumbnail')%>
+      <%= image_tag('BrewFest2018', class: 'img-fluid img-thumbnail')%>
     </div>
   </div>
-  <div class="row text-center justify-content-center mt-4">
-    <div class="col-12 beer-list mb-2">
-      <hr class="bg-primary border-5 border-top border-primary w-75 mx-auto" />
-      <%= image_tag('LBG_BottleCap', class: 'd-inline align-middle mt-2', style:'width:70px;') %>
-      <h2 class="d-inline align-middle text-primary ms-2">55+ Beers, Ciders, and Meads On Tap</h2>
-      <div class="row mt-3">
-        <div class="col-10 col-lg-6 offset-1 offset-lg-3 text-start text-primary">
-          <ul>
-            <li>Commemorative BrewFest XXVIII pint glass provided with purchase of ticket</li>
-            <li>Multiple flights of ~16 beers</li>
-            <li>Each flight is at least an hour long, allowing time to sample them all</li>
-            <li>Flight times and beer descriptions will be posted onsite</li>
-            <li>There will be homebrewed soda to sample as well</li>
-            <li><b><%= link_to "Log In", new_user_session_path%></b> to keep track of sampled beers, rate beers, and leave comments for the brewer</li>
-          </ul>
+  <div class="row justify-content-center mt-4">
+    <div class="col-lg-10">
+      <div class="card shadow">
+        <div class="card-header">
+          <%= image_tag('LBG_BottleCap', class: 'd-inline align-middle mt-2', style:'width:70px;') %>
+          <h2 class="d-inline align-middle text-primary ms-2">55+ Beers, Ciders, and Meads On Tap</h2>
         </div>
-      </div>
-    </div>
-    <div class="col-12 beer-list mb-2">
-      <hr class="bg-primary border-5 border-top border-primary w-75 mx-auto" />
-      <%= image_tag('LBG_BottleCap', class: 'd-inline align-middle mt-2', style:'width:70px;') %>
-      <h2 class="d-inline align-middle text-primary ms-2">5 Live Bands</h2>
-      <div class="row mt-3">
-        <div class="col-10 col-lg-6 offset-1 offset-lg-3 text-start text-primary">
-          <ul>
-            <li>Live musical performances by esteemed local artists throughout the day</li>
-            <li>Multiple music genres - There is something for everyone!</li>
-            <li>Opportunities to interact with artists after their set</li>
-            <li>Music lineup and times coming soon!</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="col-12 beer-list mb-2">
-      <hr class="bg-primary border-5 border-top border-primary w-75 mx-auto" />
-      <%= image_tag('LBG_BottleCap', class: 'd-inline align-middle mt-2', style:'width:70px;') %>
-      <h2 class="d-inline align-middle text-primary ms-2">Catered BBQ and Potluck</h2>
-      <div class="row mt-3">
-        <div class="col-10 col-lg-6 offset-1 offset-lg-3 text-start text-primary">
-          <ul>
-            <li>Catered mains to be announced soon!  </li>
-            <li>Potluck with side dishes and desserts contributed by members</li>
-            <li><b>FREE!</b> Included with purchase of BrewFest ticket</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="col-12 beer-list mb-2">
-      <hr class="bg-primary border-5 border-top border-primary w-75 mx-auto" />
-      <%= image_tag('LBG_BottleCap', class: 'd-inline align-middle mt-2', style:'width:70px;') %>
-      <h2 class="d-inline align-middle text-primary ms-2">Overnight Camping</h2>
-      <div class="row mt-3">
-        <div class="col-10 col-lg-6 offset-1 offset-lg-3 text-start text-primary">
-          <ul>
-            <li>Campsites available for members and their family</li>
-            <li>Limited number of spots - first come/first serve</li>
-            <li>Be respectful of the grounds and other campers</li>
-            <li>Pick up all trash and leave the site in better condition than you found it</li>
-          </ul>
-        </div>
-      </div>
-      <hr class="bg-primary border-5 border-top border-primary w-75 mx-auto" />
-    </div>
-    
-    <% if false %>
-      <% if user_signed_in? && current_user.current_member? %>
-        <div class="row mt-3 mb-5">
-          <div class="col-12">
-            <div class="d-grid gap-2">
-              <%= link_to "BUY TICKETS", "https://www.lawrencebrewers.org/lbgforum/viewtopic.php?f=21&t=4820", target: "_blank", class: 'btn btn-primary btn-lg border-4 border-danger py-5', style: 'font-size: 32px; font-weight: 800; border-style: double'%>
+        <div class="card-body">
+          <div class="row mt-3">
+            <div class="text-start text-primary">
+              <ul>
+                <li>Commemorative BrewFest XXIX pint glass provided with purchase of ticket</li>
+                <li>Multiple flights of ~16 beers</li>
+                <li>Each flight is at least an hour long, allowing time to sample them all</li>
+                <li>Flight times and beer descriptions will be posted onsite</li>
+                <li>There will be homebrewed soda to sample as well</li>
+                <li><b><%= link_to "Log In", new_user_session_path%></b> to keep track of sampled beers, rate beers, and leave comments for the brewer</li>
+              </ul>
             </div>
-            <span class="text-primary"><b>* Must be a current/paid Lawrence Brewers Guild member to purchase</b></span>
           </div>
         </div>
-      <% end %>
+      </div>
+    </div>
+    <div class="col-lg-10 mt-3">
+      <div class="card shadow">
+        <div class="card-header">
+          <%= image_tag('LBG_BottleCap', class: 'd-inline align-middle mt-2', style:'width:70px;') %>
+          <h2 class="d-inline align-middle text-primary ms-2">3 Live Bands</h2>
+        </div>
+        <div class="card-body">
+          <div class="row mt-3">
+            <div class="text-start text-primary">
+              <ul>
+                <li>Live musical performances by esteemed local artists throughout the day</li>
+                <li>Multiple music genres - There is something for everyone!</li>
+                <li>Opportunities to interact with artists after their set</li>
+                <li>Music lineup and times coming soon!</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-10 mt-3">
+      <div class="card shadow">
+        <div class="card-header">
+          <%= image_tag('LBG_BottleCap', class: 'd-inline align-middle mt-2', style:'width:70px;') %>
+          <h2 class="d-inline align-middle text-primary ms-2">Catered BBQ and Potluck</h2>
+        </div>
+        <div class="card-body">
+          <div class="row mt-3">
+            <div class="text-start text-primary">
+              <ul>
+                <li>Catered mains to be announced soon!  </li>
+                <li>Potluck with side dishes and desserts contributed by members</li>
+                <li><b>FREE!</b> Included with purchase of BrewFest ticket</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-10 mt-3">
+      <div class="card shadow">
+        <div class="card-header">
+          <%= image_tag('LBG_BottleCap', class: 'd-inline align-middle mt-2', style:'width:70px;') %>
+          <h2 class="d-inline align-middle text-primary ms-2">Overnight Camping</h2>
+        </div>
+        <div class="card-body">
+          <div class="row mt-3">
+            <div class="text-start text-primary">
+              <ul>
+                <li>Campsites available for members and their family</li>
+                <li>Limited number of spots - first come/first serve</li>
+                <li>Be respectful of the grounds and other campers</li>
+                <li>Pick up all trash and leave the site in better condition than you found it</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <% if user_signed_in? && current_user.current_member? %>
+      <div class="row mt-3 mb-5 text-center">
+        <div class="col-12">
+          <div class="d-grid gap-2">
+            <%= link_to "BUY TICKETS", "https://www.lawrencebrewers.org/lbgforum/viewtopic.php?t=4902", target: "_blank", class: 'btn btn-primary btn-lg border-4 border-danger py-5', style: 'font-size: 32px; font-weight: 800; border-style: double'%>
+          </div>
+          <span class="text-primary"><b>* Must be a current/paid Lawrence Brewers Guild member to purchase</b></span>
+        </div>
+      </div>
+    <% else %>
+      <div class="row mt-3 mb-5 text-center">
+        <div class="col-12 alert alert-warning border border-2">
+          <h2 class="text-primary">To buy tickets, talk to any Lawrence Brewers Guild member or email the president</h2>
+          <p class="text-primary pt-2"><a class="btn btn-primary btn-lg" href="mailto:president@lawrencebrewers.org">president@lawrencebrewers.org</a></p>
+        </div>
+      </div>
     <% end %>
+
   </div>
 </div>
